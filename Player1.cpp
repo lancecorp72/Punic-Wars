@@ -11,7 +11,7 @@ Player1::Player1(QGraphicsItem * parent): QGraphicsPixmapItem(parent){
 }
 
 void Player1::keyPressEvent(QKeyEvent *event) {
-    if(event->key() == Qt::Key_Enter){
+    if(event->key() == Qt::Key_Return){
         if(select == true){
             select=false;
         }
@@ -24,11 +24,11 @@ void Player1::keyPressEvent(QKeyEvent *event) {
         }
     }
     else if(event->key() == Qt::Key_Right && select == true) {
-        if(t->x()<750)
+        if(t->x()<1450)
             t->setPos(t->x()+50,t->y());
     }
     else if(event->key() == Qt::Key_Down && select == true) {
-        if(t->y()<550)
+        if(t->y()<500)
             t->setPos(t->x(),t->y()+50);
     }
     else if(event->key() == Qt::Key_Left && select == true) {

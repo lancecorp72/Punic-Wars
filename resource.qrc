@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/images">
         <file>tower.jpg</file>
+        <file>map.jpg</file>
     </qresource>
 </RCC>
