@@ -12,7 +12,7 @@ Game::Game(){
     scene = new QGraphicsScene();
     //set scene size to finite number
     scene->setSceneRect(0,0,1500,550);
-    setBackgroundBrush(QBrush(QImage(":/images/map.jpg")));
+    setBackgroundBrush(QBrush(QImage(":/Resources/images/map.jpg")));
 
     //disable scrollbars and fix scene size
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);

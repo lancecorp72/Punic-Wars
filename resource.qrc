@@ -1,6 +1,7 @@
 <RCC>
-    <qresource prefix="/images">
-        <file>tower.jpg</file>
-        <file>map.jpg</file>
+    <qresource prefix="/Resources/images"/>
+    <qresource prefix="/">
+        <file>Resources/images/map.jpg</file>
+        <file>Resources/images/tower.jpg</file>
     </qresource>
 </RCC>

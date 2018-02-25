@@ -9,7 +9,7 @@
 
 Tower::Tower(){
     // set the graphics
-    setPixmap(QPixmap(":/images/tower.jpg"));
+    setPixmap(QPixmap(":/Resources/images/tower.jpg"));
 
     // create points vector
     QVector<QPointF> points;

@@ -7,7 +7,6 @@
 Player1::Player1(QGraphicsItem * parent): QGraphicsPixmapItem(parent){
     select=false;
     t=nullptr;
-    qInfo()<<"start";
 }
 
 void Player1::keyPressEvent(QKeyEvent *event) {
@@ -16,7 +15,6 @@ void Player1::keyPressEvent(QKeyEvent *event) {
             select=false;
         }
         else{
-            qInfo()<<"enter";
             select=true;
             t=new Tower();
             t->setPos(0,0);

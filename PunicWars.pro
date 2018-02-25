@@ -9,7 +9,7 @@ QT       += core gui \
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = Game
+TARGET = PunicWars
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -26,14 +26,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-    Game.cpp \
-    Tower.cpp \
-    Player1.cpp
+    Source/Game.cpp \
+    Source/Tower.cpp \
+    Source/Player1.cpp
 
 HEADERS += \
-    Tower.h \
-    Game.h \
-    Player1.h
+    Headers/Tower.h \
+    Headers/Game.h \
+    Headers/Player1.h
+
+INCLUDEPATH += $$PWD/Headers
 
 RESOURCES += \
     resource.qrc
