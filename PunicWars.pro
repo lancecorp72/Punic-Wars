@@ -28,12 +28,14 @@ SOURCES += \
         main.cpp \
     Source/Game.cpp \
     Source/Tower.cpp \
-    Source/Player1.cpp
+    Source/Player1.cpp \
+    Source/Bullet.cpp
 
 HEADERS += \
     Headers/Tower.h \
     Headers/Game.h \
-    Headers/Player1.h
+    Headers/Player1.h \
+    Headers/Bullet.h
 
 INCLUDEPATH += $$PWD/Headers
 

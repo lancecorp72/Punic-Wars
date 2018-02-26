@@ -2,6 +2,7 @@
 #include <QGraphicsScene>
 #include <QKeyEvent>
 #include "Tower.h"
+#include "Bullet.h"
 #include <QDebug>
 
 Player1::Player1(QGraphicsItem * parent): QGraphicsPixmapItem(parent){
@@ -10,32 +11,40 @@ Player1::Player1(QGraphicsItem * parent): QGraphicsPixmapItem(parent){
 }
 
 void Player1::keyPressEvent(QKeyEvent *event) {
-    if(event->key() == Qt::Key_Return){
-        if(select == true){
+    if(select == true) {        //tower is selected
+        if(event->key() == Qt::Key_Return) {
             select=false;
         }
-        else{
+        else if(event->key() == Qt::Key_Right) {
+            if(t->x()<1450)
+                t->setPos(t->x()+50,t->y());
+        }
+        else if(event->key() == Qt::Key_Down) {
+            if(t->y()<500)
+                t->setPos(t->x(),t->y()+50);
+        }
+        else if(event->key() == Qt::Key_Left) {
+            if(t->x()>0)
+                t->setPos(t->x()-50,t->y());
+        }
+        else if(event->key() == Qt::Key_Up) {
+            if(t->y()>0)
+                t->setPos(t->x(),t->y()-50);
+        }
+    }
+    else {                      //no towers are selected
+        if(event->key() == Qt::Key_Return) {
             select=true;
             t=new Tower();
             t->setPos(0,0);
             scene()->addItem(t);
         }
-    }
-    else if(event->key() == Qt::Key_Right && select == true) {
-        if(t->x()<1450)
-            t->setPos(t->x()+50,t->y());
-    }
-    else if(event->key() == Qt::Key_Down && select == true) {
-        if(t->y()<500)
-            t->setPos(t->x(),t->y()+50);
-    }
-    else if(event->key() == Qt::Key_Left && select == true) {
-        if(t->x()>0)
-            t->setPos(t->x()-50,t->y());
-    }
-    else if(event->key() == Qt::Key_Up && select == true) {
-        if(t->y()>0)
-            t->setPos(t->x(),t->y()-50);
+        else if(event->key() == Qt::Key_D) {
+            Bullet * bullet = new Bullet();
+            bullet->setPos(50,50);
+            bullet->setRotation(40);
+            scene()->addItem(bullet);
+        }
     }
 }
 
