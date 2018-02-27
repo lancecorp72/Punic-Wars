@@ -6,7 +6,7 @@
 
 extern Game * game;
 
-Bullet::Bullet(QGraphicsItem *parent): QObject(),QGraphicsPixmapItem(parent){
+Bullet::Bullet(QGraphicsItem *parent): QObject(),QGraphicsPixmapItem(parent) {
     // set graphics
     setPixmap(QPixmap(":Resources/images/bullet.png"));
 
@@ -20,7 +20,7 @@ Bullet::Bullet(QGraphicsItem *parent): QObject(),QGraphicsPixmapItem(parent){
     distanceTravelled = 0;
 }
 
-void Bullet::move(){
+void Bullet::move() {
     int STEP_SIZE = 30;
     double theta = rotation(); // degrees
 
@@ -30,18 +30,18 @@ void Bullet::move(){
     setPos(x()+dx, y()+dy);
 }
 
-double Bullet::getMaxRange(){
+double Bullet::getMaxRange() {
     return maxRange;
 }
 
-double Bullet::getDistanceTravelled(){
+double Bullet::getDistanceTravelled() {
     return distanceTravelled;
 }
 
-void Bullet::setMaxRange(double rng){
+void Bullet::setMaxRange(double rng) {
 maxRange = rng;
 }
 
-void Bullet::setDistanceTravelled(double dist){
+void Bullet::setDistanceTravelled(double dist) {
     distanceTravelled = dist;
 }

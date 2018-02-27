@@ -8,12 +8,14 @@
 Player1::Player1(QGraphicsItem * parent): QGraphicsPixmapItem(parent){
     select=false;
     t=nullptr;
+    setPixmap(QPixmap(":/Resources/images/sel_tow.jpg"));
 }
 
 void Player1::keyPressEvent(QKeyEvent *event) {
     if(select == true) {        //tower is selected
         if(event->key() == Qt::Key_Return) {
             select=false;
+            setPixmap(QPixmap(":/Resources/images/sel_tow.jpg"));
         }
         else if(event->key() == Qt::Key_Right) {
             if(t->x()<1450)
@@ -38,6 +40,8 @@ void Player1::keyPressEvent(QKeyEvent *event) {
             t=new Tower();
             t->setPos(0,0);
             scene()->addItem(t);
+            setPixmap(QPixmap(":/Resources/images/tower.jpg"));
+            //scene()->addItem(p);
         }
         else if(event->key() == Qt::Key_D) {
             Bullet * bullet = new Bullet();

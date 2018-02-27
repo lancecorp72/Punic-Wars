@@ -13,6 +13,7 @@ public:
 private:
     bool select;
     Tower * t;
+    QPixmap p;
 };
 
 #endif // PLAYER1_H
