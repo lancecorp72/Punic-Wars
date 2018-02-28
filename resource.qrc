@@ -6,5 +6,7 @@
         <file>../../Downloads/TD_proj/bul1.png</file>
         <file>Resources/images/bullet.png</file>
         <file>Resources/images/sel_tow.jpg</file>
+        <file>Resources/images/boat.png</file>
+        <file>Resources/images/towB.png</file>
     </qresource>
 </RCC>

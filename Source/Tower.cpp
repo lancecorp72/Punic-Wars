@@ -1,6 +1,7 @@
 #include "Tower.h"
 #include "Bullet.h"
 #include "Game.h"
+#include "Ships.h"
 #include <QPixmap>
 #include <QVector>
 #include <QLineF>
@@ -15,7 +16,8 @@ extern Game * game;
 
 Tower::Tower(QGraphicsItem *parent):QObject(), QGraphicsPixmapItem(parent) {
     // set the graphics
-    setPixmap(QPixmap(":/Resources/images/tower.jpg"));
+    setPixmap(QPixmap(":/Resources/images/towB.png"));
+    tcenter=mapFromScene(sceneBoundingRect().center());
 
     // create points vector
     QVector<QPointF> points;
@@ -35,17 +37,15 @@ Tower::Tower(QGraphicsItem *parent):QObject(), QGraphicsPixmapItem(parent) {
     QPointF poly_center(1.5,1.5);
     poly_center *= SCALE_FACTOR;
     poly_center = mapToScene(poly_center);
-    QPointF tower_center(x()+13,y()+25);
+    QPointF tower_center(pos()+tcenter);
     QLineF ln(poly_center,tower_center);
     attack_area->setPos(x()+ln.dx(),y()+ln.dy());
 
     // connect a timer to attack_target
     QTimer * timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(get_target()));
-    timer->start(1000);
+    timer->start(700);
 
-    // set attack_dest
-    attack_dest = QPointF(800,0);
 
     //initialize has_target
     has_target=false;
@@ -62,9 +62,10 @@ double Tower::distanceTo(QGraphicsItem *item) {
 
 void Tower::fire() {
     Bullet * bullet = new Bullet();
-    bullet->setPos(x()+13,y()+25);
+    bullet->setPos(pos()+tcenter);
+    //qInfo()<<mapFromScene(sceneBoundingRect().center());
 
-    QLineF ln(QPointF(x()+13,y()+25),attack_dest);
+    QLineF ln(pos()+tcenter,attack_dest);
     int angle = -1 * ln.angle();
 
     bullet->setRotation(angle);
@@ -75,26 +76,31 @@ void Tower::get_target(){
     // get a list of all items colliding with attack_area
     QList<QGraphicsItem *> colliding_items = attack_area->collidingItems();
 
-    if (colliding_items.size() == 1){
+    if (colliding_items.size() <= 1){
         has_target = false;
         return;
     }
 
     double closest_dist = 300;
     QPointF closest_pt = QPointF(0,0);
+
     for (size_t i = 0, n = colliding_items.size(); i < n; i++){
-        Bullet * bul = dynamic_cast<Bullet *>(colliding_items[i]);
-        if (bul){
-            double this_dist = distanceTo(bul);
+        Ships * ship = dynamic_cast<Ships *>(colliding_items[i]);
+        if (ship){
+            double this_dist = distanceTo(ship);
             if (this_dist < closest_dist){
                 closest_dist = this_dist;
-                closest_pt = colliding_items[i]->pos();
+                closest_pt = colliding_items[i]->sceneBoundingRect().center();
                 has_target = true;
             }
         }
     }
 
     attack_dest = closest_pt;
-    fire();
+    if(has_target)
+    {
+        fire();
+        has_target=false;
+    }
 
 }

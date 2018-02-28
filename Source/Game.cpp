@@ -3,6 +3,7 @@
 #include <QKeyEvent>
 #include "Tower.h"
 #include "Player1.h"
+#include "Ships.h"
 #include <QBrush>
 #include <QImage>
 #include <QDebug>
@@ -27,6 +28,10 @@ Game::Game(){
     p1->setFlag(QGraphicsItem::ItemIsFocusable);
     p1->setFocus();
     scene->addItem(p1);
+
+    //Creating a ship
+    Ships * ship = new Ships();
+    scene -> addItem(ship);
 
     show();
 }

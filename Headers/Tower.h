@@ -17,7 +17,7 @@ public slots:
     void get_target();
 private:
     QGraphicsPolygonItem * attack_area;
-    QPointF attack_dest;
+    QPointF attack_dest,tcenter;
     bool has_target;
 };
 

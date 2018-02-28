@@ -3,12 +3,14 @@
 #include <QKeyEvent>
 #include "Tower.h"
 #include "Bullet.h"
+#include "Ships.h"
 #include <QDebug>
 
 Player1::Player1(QGraphicsItem * parent): QGraphicsPixmapItem(parent){
     select=false;
     t=nullptr;
     setPixmap(QPixmap(":/Resources/images/sel_tow.jpg"));
+
 }
 
 void Player1::keyPressEvent(QKeyEvent *event) {
@@ -40,14 +42,14 @@ void Player1::keyPressEvent(QKeyEvent *event) {
             t=new Tower();
             t->setPos(0,0);
             scene()->addItem(t);
-            setPixmap(QPixmap(":/Resources/images/tower.jpg"));
+            setPixmap(QPixmap(":/Resources/images/towB.jpg"));
             //scene()->addItem(p);
         }
         else if(event->key() == Qt::Key_D) {
-            Bullet * bullet = new Bullet();
-            bullet->setPos(50,50);
-            bullet->setRotation(40);
-            scene()->addItem(bullet);
+            Ships * ship = new Ships();
+            ship->setPos(50,50);
+            ship->setRotation(40);
+            scene()->addItem(ship);
         }
     }
 }
