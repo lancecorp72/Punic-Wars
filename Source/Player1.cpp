@@ -4,7 +4,6 @@
 #include "Tower.h"
 #include "Bullet.h"
 #include <QDebug>
-#include <iostream>
 
 Player1::Player1(QGraphicsEllipseItem * c,QGraphicsEllipseItem *c2 ,QGraphicsItem * parent): QGraphicsPixmapItem(parent){
     select1=false;
@@ -19,6 +18,7 @@ Player1::Player1(QGraphicsEllipseItem * c,QGraphicsEllipseItem *c2 ,QGraphicsIte
 void Player1::keyPressEvent(QKeyEvent *event) {
     if(select1 == true) {        //tower is selected
         if(event->key() == Qt::Key_Return) {
+            t->setNoFire();
             select1=false;
 
         }
@@ -73,6 +73,7 @@ void Player1::keyPressEvent(QKeyEvent *event) {
         }
     if(select2 == true) {        //tower is selected
         if(event->key() == Qt::Key_F) {
+            t1->setNoFire();
             select2=false;
 
         }
@@ -106,7 +107,7 @@ void Player1::keyPressEvent(QKeyEvent *event) {
             scene()->addItem(t1);
         }
         else if(event->key() == Qt::Key_D) {
-            if(cur1->x()<1500)
+            if(cur1->x()<1450)
                 cur1->setPos(cur1->x()+50,cur1->y());
 
 

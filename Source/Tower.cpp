@@ -47,8 +47,9 @@ Tower::Tower(QGraphicsItem *parent):QObject(), QGraphicsPixmapItem(parent) {
     timer->start(700);
 
 
-    //initialize has_target
+    //initialize bool variables
     has_target=false;
+    no_fire=true;
 
     //hides the attack radius
     //attack_area->hide();
@@ -72,7 +73,14 @@ void Tower::fire() {
     game->scene->addItem(bullet);
 }
 
+void Tower::setNoFire()
+{
+    no_fire=false;
+}
+
 void Tower::get_target(){
+    if(no_fire)
+        return;
     // get a list of all items colliding with attack_area
     QList<QGraphicsItem *> colliding_items = attack_area->collidingItems();
 

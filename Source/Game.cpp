@@ -69,6 +69,5 @@ Game::Game(){
 
 
 
-
     show();
 }
