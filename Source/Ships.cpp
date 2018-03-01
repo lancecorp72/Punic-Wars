@@ -49,7 +49,7 @@ void Ships::move_forward(){
         rotateTopoint(dest);
     }
     // move enemy forward at current angle
-    int STEP_SIZE = 20;
+    int STEP_SIZE = 3;
     double theta = rotation(); // degrees
 
     double dy = STEP_SIZE * qSin(qDegreesToRadians(theta));
