@@ -7,6 +7,7 @@
 #include <QImage>
 #include <QDebug>
 #include "Ships.h"
+#include "Resource.h"
 
 Game::Game(){
     // create a scene
@@ -23,7 +24,11 @@ Game::Game(){
     // set the scene
     setScene(scene);
 
-
+    //Create Resoource display
+    Resource *player1_resources = new Resource(1);
+    Resource *player2_resources = new Resource(2);
+    scene->addItem(player1_resources);
+    scene->addItem(player2_resources);
 
     //Create tower button
     QBrush brush1(Qt::gray, Qt::SolidPattern);
@@ -57,7 +62,6 @@ Game::Game(){
 
     Ships *ship = new Ships();
     scene->addItem(ship);
-
 
 
 
