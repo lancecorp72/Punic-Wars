@@ -9,8 +9,8 @@
 Player1::Player1(QGraphicsEllipseItem * c,QGraphicsEllipseItem *c2 ,QGraphicsItem * parent): QGraphicsPixmapItem(parent){
     select1=false;
     select2=false;
-    t=nullptr;
-    t1=nullptr;
+    t= NULL;
+    t1= NULL;
     cur=c;
     cur1=c2;
     cur1->setPos(1450,0);

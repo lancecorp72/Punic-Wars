@@ -5,12 +5,22 @@
 #include <QDebug>
 
 Ships::Ships(QGraphicsItem *parent): QGraphicsPixmapItem(parent) {
+
     // set graphics
     setPixmap(QPixmap(":/Resources/images/boat.png"));
-    setPos(700,5);
+
+    //Set position and origin
+    setPos(700,40);
+    setTransformOriginPoint(23,25);
+
     // set points
-    //points << QPointF(700,50) << QPointF(800,50);
-    points << QPointF(870,5) << QPointF(870,100)<< QPointF(1000,100) << QPointF(1000,5) << QPointF(1130,5) << QPointF(1130,250);
+    points << QPointF(925,40)                           //Horizontal Segment 1
+           << QPointF(925,140) << QPointF(1035,140)     //Segment 2
+           << QPointF(1035,40) << QPointF(1165,40)      //Segment 3
+           << QPointF(1165,250) << QPointF(1040,250)    //Segment 4
+           << QPointF(1040,445) << QPointF(1165,445)    //Segment 5
+           << QPointF(1165,355) << QPointF(1290,355)    //Segment 6
+           << QPointF(1290,445) << QPointF(1500,445);   //Segment 7
     dest_index = 0;
     dest = points[0];
     rotateTopoint(dest);
@@ -39,7 +49,7 @@ void Ships::move_forward(){
         rotateTopoint(dest);
     }
     // move enemy forward at current angle
-    int STEP_SIZE = 5;
+    int STEP_SIZE = 20;
     double theta = rotation(); // degrees
 
     double dy = STEP_SIZE * qSin(qDegreesToRadians(theta));

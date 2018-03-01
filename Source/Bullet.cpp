@@ -4,6 +4,7 @@
 #include <qmath.h>
 #include "Game.h"
 #include "Ships.h"
+#include <typeinfo>
 
 extern Game * game;
 

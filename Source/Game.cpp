@@ -6,6 +6,7 @@
 #include <QBrush>
 #include <QImage>
 #include <QDebug>
+#include "Ships.h"
 
 Game::Game(){
     // create a scene
@@ -53,6 +54,9 @@ Game::Game(){
     p1->setFlag(QGraphicsItem::ItemIsFocusable);
     p1->setFocus();
     scene->addItem(p1);
+
+    Ships *ship = new Ships();
+    scene->addItem(ship);
 
 
 
