@@ -10,7 +10,7 @@ Ships::Ships(QGraphicsItem *parent): QGraphicsPixmapItem(parent) {
     setPixmap(QPixmap(":/Resources/images/boat.png"));
 
     //Set position and origin
-    setPos(750,40);
+    setPos(550,40);
     setTransformOriginPoint(23,25);
 
     // set points

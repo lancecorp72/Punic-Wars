@@ -9,6 +9,8 @@
 #include "Ships.h"
 #include "Resource.h"
 
+Resource *player1_resources, *player2_resources;
+
 Game::Game(){
     // create a scene
     scene = new QGraphicsScene();
@@ -25,8 +27,8 @@ Game::Game(){
     setScene(scene);
 
     //Create Resoource display
-    Resource *player1_resources = new Resource(1);
-    Resource *player2_resources = new Resource(2);
+    player1_resources = new Resource(1);
+    player2_resources = new Resource(2);
     scene->addItem(player1_resources);
     scene->addItem(player2_resources);
 
