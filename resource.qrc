@@ -3,5 +3,9 @@
     <qresource prefix="/">
         <file>Resources/images/map.jpg</file>
         <file>Resources/images/tower.jpg</file>
+        <file>Resources/images/bullet.png</file>
+        <file>Resources/images/sel_tow.jpg</file>
+        <file>Resources/images/boat.png</file>
+        <file>Resources/images/towB.png</file>
     </qresource>
 </RCC>

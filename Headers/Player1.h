@@ -6,13 +6,17 @@
 #include <QGraphicsItem>
 #include "Tower.h"
 
+
 class Player1:public QObject, public QGraphicsPixmapItem {
 public:
-    Player1(QGraphicsItem * parent=0);
+    Player1(QGraphicsEllipseItem * c,QGraphicsEllipseItem *c2, QGraphicsItem * parent=0);
     void keyPressEvent(QKeyEvent * event);
-private:
-    bool select;
-    Tower * t;
-};
 
+private:
+    bool select1,select2;
+    Tower * t;
+    Tower * t1;
+    QGraphicsEllipseItem * cur;
+    QGraphicsEllipseItem * cur1;
+};
 #endif // PLAYER1_H
