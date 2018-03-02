@@ -68,7 +68,7 @@ Game::Game(){
     p1->setFocus();
     scene->addItem(p1);
 
-    Ships *ship = new Ships();
+    Ships *ship = new Ships(2);
     scene->addItem(ship);
 
 
