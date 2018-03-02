@@ -25,6 +25,7 @@ private:
     int h;
     int max_h;
     int pcode;
+    int distance;
 
 };
 

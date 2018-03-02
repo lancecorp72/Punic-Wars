@@ -21,29 +21,29 @@ Resource::Resource(int player_code, QGraphicsItem *parent): QGraphicsTextItem(pa
     setFont(QFont("times",20));
 }
 
-void Resource::incT(){
-    t_res++;
+void Resource::incT(int amt){
+    t_res+=amt;
     setRes();
 }
 
-void Resource::incS(){
-    s_res++;
+void Resource::incS(int amt){
+    s_res+=amt;
     setRes();
 }
 
-void Resource::decT()
+void Resource::decT(int amt)
 {
     if(t_res<=0)
         return;
-    t_res--;
+    t_res-=amt;
     setRes();
 }
 
-void Resource::decS()
+void Resource::decS(int amt)
 {
     if(s_res<=0)
         return;
-    s_res--;
+    s_res-=amt;
     setRes();
 }
 

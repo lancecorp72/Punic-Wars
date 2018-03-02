@@ -25,7 +25,7 @@ void Player1::keyPressEvent(QKeyEvent *event) {
             //tower to start firing only after placed
             t->setNoFire();
             //cost is deducted when tower is placed
-            player1_resources->decT();
+            player1_resources->decT(1);
             //make cursor opaque after tower is placed
             cur->setOpacity(1);
             select1=false;
@@ -96,7 +96,7 @@ void Player1::keyPressEvent(QKeyEvent *event) {
             //tower to start firing only after placed
             t1->setNoFire();
             //cost is deducted when tower is placed
-            player2_resources->decT();
+            player2_resources->decT(1);
             //make cursor opaque after tower is placed
             cur1->setOpacity(1);
             select2=false;

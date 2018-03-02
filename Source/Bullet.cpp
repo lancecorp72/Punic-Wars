@@ -36,10 +36,10 @@ void Bullet::move() {
         if (typeid(*(colliding_items[i])) == typeid(Ships)) {
                 //when ship is destroyed, resource is increased for attacking player
                 if(colliding_items[i]->x()<750) {
-                    player1_resources->incS();
+                    player1_resources->incS(1);
                 }
                 else {
-                    player2_resources->incS();
+                    player2_resources->incS(1);
                 }
 
                 // remove them from the scene (still on the heap)

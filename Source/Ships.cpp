@@ -5,6 +5,9 @@
 #include <QDebug>
 #include <QBrush>
 #include <QGraphicsScene>
+#include "Resource.h"
+extern Resource *player1_resources;
+extern Resource *player2_resources;
 Ships::Ships(int player_code ,QGraphicsScene * scene,QGraphicsItem *parent,int health): QGraphicsPixmapItem(parent) {
 
 
@@ -15,8 +18,7 @@ Ships::Ships(int player_code ,QGraphicsScene * scene,QGraphicsItem *parent,int h
     max_h= health;
     s=scene;
     pcode=player_code;
-
-
+    distance=0;
     // set graphics
     if(player_code == 1)
         setPixmap(QPixmap(":/Resources/images/boat1.png"));
@@ -78,12 +80,16 @@ void Ships::decreasehealth(int damage)
 
  h=h-damage;
  if(h>0)        //If possible , reduce health
- healthbar->setRect(5+(pcode-1)*10,5+(pcode-1)*35,h*25/max_h,5);
+ healthbar->setRect(5+(pcode-1)*10,5+(pcode-1)*35,h*25/max_h,5);  //hates another if
  else           // else destroy ship
  {
      s->removeItem(this);
      s->removeItem(healthbar);
      delete this;
+     if(pcode==1)
+     player1_resources->incT(distance/50);
+     else
+     player2_resources->incT(distance/50);
  }
 }
 void Ships::rotateTopoint(QPointF p){
@@ -104,7 +110,7 @@ void Ships::move_forward(){
         rotateTopoint(dest);
     }
     // move enemy forward at current angle
-
+    distance++;
     int STEP_SIZE = 3;
 
     double theta = rotation(); // degrees
