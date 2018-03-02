@@ -48,8 +48,8 @@ Tower::Tower(QGraphicsItem *parent):QObject(), QGraphicsPixmapItem(parent) {
 
 
     //initialize bool variables
-    has_target=false;
-    no_fire=true;
+    has_target=false;   // check whether a target is obtained
+    no_fire=true;       //to prevent tower from firing before it is placed
 
     //hides the attack radius
     //attack_area->hide();
