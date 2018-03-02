@@ -26,6 +26,7 @@ private:
     int max_h;
     int pcode;
     int distance;
+    QTimer * timer;
 
 };
 

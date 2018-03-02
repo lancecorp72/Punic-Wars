@@ -6,8 +6,11 @@
 #include <QBrush>
 #include <QGraphicsScene>
 #include "Resource.h"
+#include <QMessageBox>
+#include "Game.h"
 extern Resource *player1_resources;
 extern Resource *player2_resources;
+extern Game * game;
 Ships::Ships(int player_code ,QGraphicsScene * scene,QGraphicsItem *parent,int health): QGraphicsPixmapItem(parent) {
 
 
@@ -70,9 +73,11 @@ Ships::Ships(int player_code ,QGraphicsScene * scene,QGraphicsItem *parent,int h
     rotateTopoint(dest);
 
     // connect timer to move_forward
-    QTimer * timer = new QTimer(this);
+    timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(move_forward()));
     timer->start(100);
+
+
 
 }
 void Ships::decreasehealth(int damage)
@@ -99,16 +104,57 @@ void Ships::rotateTopoint(QPointF p){
 }
 
 void Ships::move_forward(){
+
+
+
+
     // if close to dest, rotate to next dest
+
+
+
 
     QLineF ln(pos(),dest);
     if (ln.length() < 10){
         dest_index++;
         if(dest_index >= points.size())
+        {
+            if(pcode==1)
+            {
+
+                timer->blockSignals(true);
+                QMessageBox::StandardButton reply = QMessageBox::information(game,
+                                                  "Winner Winner Chicken Dinner", "Player 1 Wins",
+                                         QMessageBox::Ok );
+
+
+                game->close();
+
+             }
+            else
+            {
+
+
+                timer->blockSignals(true);
+                QMessageBox::StandardButton reply = QMessageBox::information(game,
+                                                  "Winner Winner Chicken Dinner", "Player 2 Wins",
+                                         QMessageBox::Ok );
+
+                game->close();
+
+
+            }
+
+            delete this;
             return;
+
+        }
+
         dest = points[dest_index];
         rotateTopoint(dest);
     }
+
+
+
     // move enemy forward at current angle
     distance++;
     int STEP_SIZE = 3;
