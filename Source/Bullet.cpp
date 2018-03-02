@@ -33,12 +33,12 @@ void Bullet::move() {
     // if one of the colliding items is an Enemy, destroy both the bullet and the enemy
     for (int i = 0, n = colliding_items.size(); i < n; ++i) {
         if (typeid(*(colliding_items[i])) == typeid(Ships)) {
-
+                //when ship is destroyed, resource is increased for attacking player
                 if(colliding_items[i]->x()<750) {
-                    player1_resources->increase();
+                    player1_resources->incS();
                 }
                 else {
-                    player2_resources->increase();
+                    player2_resources->incS();
                 }
 
                 // remove them from the scene (still on the heap)
