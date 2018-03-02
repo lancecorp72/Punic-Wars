@@ -70,12 +70,8 @@ Game::Game(){
 
     Ships *ship = new Ships(2);
     scene->addItem(ship);
-
-
-
-
-
-
+    ship = new Ships(1);
+    scene->addItem(ship);
 
     show();
 }
