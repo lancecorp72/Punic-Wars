@@ -6,7 +6,7 @@
 #include <QList>
 #include <QPointF>
 
-class Ships: public QObject, public QGraphicsPixmapItem{
+class Ships: public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
 public:
     Ships(int player_code, QGraphicsItem * parent=0);

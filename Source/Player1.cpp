@@ -6,6 +6,7 @@
 #include "Bullet.h"
 #include "Resource.h"
 #include <QDebug>
+#include "Ships.h"
 
 extern Resource *player1_resources, *player2_resources;
 
@@ -90,6 +91,15 @@ void Player1::keyPressEvent(QKeyEvent *event) {
             if(cur->y()>0)
                 cur->setPos(cur->x(),cur->y()-50);
         }
+        else if(event->key() == Qt::Key_Shift){
+            if(player1_resources->getS() == 0){
+                qInfo() << "Not enough iron";
+                return;
+            }
+            Ships *ships_p1 = new Ships(1);
+            scene()->addItem(ships_p1);
+            player1_resources->decS();
+        }
     }
     if(select2 == true) {        //tower is selected
         if(event->key() == Qt::Key_F) {
@@ -161,6 +171,15 @@ void Player1::keyPressEvent(QKeyEvent *event) {
         else if(event->key() == Qt::Key_W) {
             if(cur1->y()>0)
                 cur1->setPos(cur1->x(),cur1->y()-50);
+        }
+        else if(event->key() == Qt::Key_C){
+            if(player2_resources->getS() == 0){
+                qInfo() << "Not enough iron";
+                return;
+            }
+            Ships *ships_p2 = new Ships(2);
+            scene()->addItem(ships_p2);
+            player2_resources->decS();
         }
 
     }
