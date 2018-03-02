@@ -11,10 +11,11 @@ extern Game * game;
 extern Resource *player1_resources;
 extern Resource *player2_resources;
 
-Bullet::Bullet(QGraphicsItem *parent): QObject(),QGraphicsPixmapItem(parent) {
+Bullet::Bullet(QGraphicsItem *parent,int d): QObject(),QGraphicsPixmapItem(parent) {
     // set graphics
     setPixmap(QPixmap(":Resources/images/bullet.png"));
-
+    //Initialization
+    damage=d;
     // connect a timer to move()
     QTimer * move_timer = new QTimer(this);
     connect(move_timer,SIGNAL(timeout()),this,SLOT(move()));
@@ -42,12 +43,15 @@ void Bullet::move() {
                 }
 
                 // remove them from the scene (still on the heap)
-                scene()->removeItem(colliding_items[i]);
-                scene()->removeItem(this);
+                               Ships *s =(Ships *)colliding_items[i];
 
-                // delete them from the heap to save memory
-                delete colliding_items[i];
-                delete this;
+                               s->decreasehealth(damage);
+
+                               scene()->removeItem(this);
+
+                               // delete them from the heap to save memory
+
+                               delete this;
 
                 // return (all code below refers to a non existant bullet)
                 return;

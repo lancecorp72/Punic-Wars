@@ -3,8 +3,19 @@
 #include <QTimer>
 #include <qmath.h>
 #include <QDebug>
+#include <QBrush>
+#include <QGraphicsScene>
+Ships::Ships(int player_code ,QGraphicsScene * scene,QGraphicsItem *parent,int health): QGraphicsPixmapItem(parent) {
 
-Ships::Ships(int player_code , QGraphicsItem *parent): QGraphicsPixmapItem(parent) {
+
+
+
+    //Initialization
+    h=health;
+    max_h= health;
+    s=scene;
+    pcode=player_code;
+
 
     // set graphics
     if(player_code == 1)
@@ -12,6 +23,21 @@ Ships::Ships(int player_code , QGraphicsItem *parent): QGraphicsPixmapItem(paren
     else if(player_code == 2)
         setPixmap(QPixmap(":/Resources/images/boat2.png"));
 
+
+         s->addItem(this);
+
+
+     //add healthbar
+     if(player_code==1)
+     healthbar = new QGraphicsRectItem(5,5,25,5);
+     else
+     healthbar = new QGraphicsRectItem(15,40,25,5);
+     healthbar->setPos(730,40);
+     healthbar->setBrush(QBrush(Qt::red,Qt::SolidPattern));
+
+     healthbar->show();
+     healthbar->setTransformOriginPoint(23,25);
+     s->addItem(healthbar);
     //Set position and origin
     setPos(730,40);
     setTransformOriginPoint(23,25);
@@ -47,10 +73,23 @@ Ships::Ships(int player_code , QGraphicsItem *parent): QGraphicsPixmapItem(paren
     timer->start(100);
 
 }
+void Ships::decreasehealth(int damage)
+{
 
+ h=h-damage;
+ if(h>0)        //If possible , reduce health
+ healthbar->setRect(5+(pcode-1)*10,5+(pcode-1)*35,h*25/max_h,5);
+ else           // else destroy ship
+ {
+     s->removeItem(this);
+     s->removeItem(healthbar);
+     delete this;
+ }
+}
 void Ships::rotateTopoint(QPointF p){
     QLineF ln(pos(),p);
     setRotation(-1 * ln.angle());
+    healthbar->setRotation(-1 * ln.angle());
 }
 
 void Ships::move_forward(){
@@ -74,5 +113,6 @@ void Ships::move_forward(){
     double dx = STEP_SIZE * qCos(qDegreesToRadians(theta));
 
      setPos(x()+dx, y()+dy);
+      healthbar->setPos(x()+dx,y()+dy);
 
 }
