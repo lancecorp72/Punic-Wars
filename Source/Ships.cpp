@@ -11,7 +11,7 @@
 extern Resource *player1_resources;
 extern Resource *player2_resources;
 extern Game * game;
-Ships::Ships(int player_code ,QGraphicsScene * scene,QGraphicsItem *parent,int health): QGraphicsPixmapItem(parent) {
+Ships::Ships(int player_code ,QGraphicsScene * scene,int health,QGraphicsItem *parent): QGraphicsPixmapItem(parent) {
 
 
 
@@ -34,9 +34,9 @@ Ships::Ships(int player_code ,QGraphicsScene * scene,QGraphicsItem *parent,int h
 
      //add healthbar
      if(player_code==1)
-     healthbar = new QGraphicsRectItem(5,5,25,5);
+            healthbar = new QGraphicsRectItem(5,5,25,5);
      else
-     healthbar = new QGraphicsRectItem(15,40,25,5);
+            healthbar = new QGraphicsRectItem(15,40,25,5);
      healthbar->setPos(730,40);
      healthbar->setBrush(QBrush(Qt::red,Qt::SolidPattern));
 
@@ -85,16 +85,21 @@ void Ships::decreasehealth(int damage)
 
  h=h-damage;
  if(h>0)        //If possible , reduce health
- healthbar->setRect(5+(pcode-1)*10,5+(pcode-1)*35,h*25/max_h,5);  //hates another if
+        healthbar->setRect(5+(pcode-1)*10,5+(pcode-1)*35,h*25/max_h,5);  //hates another if
  else           // else destroy ship
  {
      s->removeItem(this);
      s->removeItem(healthbar);
      delete this;
-     if(pcode==1)
-     player1_resources->incT(distance/50);
-     else
-     player2_resources->incT(distance/50);
+     //when ship is destroyed, resource is increased for attacking player
+     if(pcode==1) {
+      player1_resources->incT(distance/50);
+      player2_resources->incS(1);
+     }
+     else {
+        player2_resources->incT(distance/50);
+        player1_resources->incS(1);
+     }
  }
 }
 void Ships::rotateTopoint(QPointF p){
@@ -105,16 +110,9 @@ void Ships::rotateTopoint(QPointF p){
 
 void Ships::move_forward(){
 
-
-
-
     // if close to dest, rotate to next dest
-
-
-
-
     QLineF ln(pos(),dest);
-    if (ln.length() < 10){
+    if (ln.length() < 10) {
         dest_index++;
         if(dest_index >= points.size())
         {
@@ -125,10 +123,7 @@ void Ships::move_forward(){
                 QMessageBox::StandardButton reply = QMessageBox::information(game,
                                                   "Winner Winner Chicken Dinner", "Player 1 Wins",
                                          QMessageBox::Ok );
-
-
                 game->close();
-
              }
             else
             {
@@ -138,10 +133,7 @@ void Ships::move_forward(){
                 QMessageBox::StandardButton reply = QMessageBox::information(game,
                                                   "Winner Winner Chicken Dinner", "Player 2 Wins",
                                          QMessageBox::Ok );
-
                 game->close();
-
-
             }
 
             delete this;
@@ -157,14 +149,14 @@ void Ships::move_forward(){
 
     // move enemy forward at current angle
     distance++;
-    int STEP_SIZE = 3;
+    int STEP_SIZE = 10;
 
     double theta = rotation(); // degrees
 
     double dy = STEP_SIZE * qSin(qDegreesToRadians(theta));
     double dx = STEP_SIZE * qCos(qDegreesToRadians(theta));
 
-     setPos(x()+dx, y()+dy);
-      healthbar->setPos(x()+dx,y()+dy);
+    setPos(x()+dx, y()+dy);
+    healthbar->setPos(x()+dx,y()+dy);
 
 }

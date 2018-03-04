@@ -32,7 +32,7 @@ Game::Game(){
     scene->addItem(player1_resources);
     scene->addItem(player2_resources);
 
-    //Create tower button
+    //Create tower button for player 1
     QBrush brush1(Qt::gray, Qt::SolidPattern);
     QPen pen(Qt::black);
     QFont serifFont("Times", 20, QFont::Bold);
@@ -42,13 +42,20 @@ Game::Game(){
     text->setPos(0,0);
     text=scene->addText("Cost: 1 bronze",costFont);
     text->setPos(0,24);
+    //Create ship button for player 1
+    scene->addRect(0,50,100,50,pen,brush1);
+    text=scene->addText("Ship",serifFont);
+    text->setPos(0,50);
+    text=scene->addText("Cost: 1 iron",costFont);
+    text->setPos(0,80);
+    //Cursor for player 1
     QGraphicsEllipseItem *ei = new QGraphicsEllipseItem(QRect(QPoint(0,0),QSize(15,15)));
     QBrush brush2(Qt::red,Qt::SolidPattern);
     ei->setBrush(brush2);
     scene->addItem(ei);
 
 
-    //Create tower button
+    //Create tower button for player 2
     QBrush brush3(Qt::gray, Qt::SolidPattern);
     QPen pen1(Qt::black);
     scene->addRect(1400,0,1500,50,pen1,brush3);
@@ -56,6 +63,13 @@ Game::Game(){
     text1->setPos(1400,0);
     text1=scene->addText("Cost: 1 bronze",costFont);
     text1->setPos(1400,24);
+    //Create ship button for player 2
+    scene->addRect(1400,50,100,50,pen1,brush3);
+    text=scene->addText("Ship",serifFont);
+    text->setPos(1400,50);
+    text=scene->addText("Cost: 1 iron",costFont);
+    text->setPos(1400,80);
+    //Cursor for player 2
     QGraphicsEllipseItem *ei2 = new QGraphicsEllipseItem(QRect(QPoint(0,0),QSize(15, 15)));
     QBrush brush4(Qt::blue,Qt::SolidPattern);
     ei2->setBrush(brush4);
@@ -67,10 +81,6 @@ Game::Game(){
     p1->setFlag(QGraphicsItem::ItemIsFocusable);
     p1->setFocus();
     scene->addItem(p1);
-
-    Ships *ship = new Ships(2,scene);
-
-    ship = new Ships(1,scene);
 
 
     show();

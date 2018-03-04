@@ -12,11 +12,11 @@ Resource::Resource(int player_code, QGraphicsItem *parent): QGraphicsTextItem(pa
 
     if(player_code == 1){
         setDefaultTextColor(Qt::red);
-        setPos(0,45);
+        setPos(0,100);
     }
     else if(player_code == 2){
         setDefaultTextColor(Qt::blue);
-        setPos(1350,45);
+        setPos(1350,100);
     }
     setFont(QFont("times",20));
 }
@@ -33,7 +33,7 @@ void Resource::incS(int amt){
 
 void Resource::decT(int amt)
 {
-    if(t_res<=0)
+    if(t_res<amt)
         return;
     t_res-=amt;
     setRes();
@@ -41,7 +41,7 @@ void Resource::decT(int amt)
 
 void Resource::decS(int amt)
 {
-    if(s_res<=0)
+    if(s_res<amt)
         return;
     s_res-=amt;
     setRes();

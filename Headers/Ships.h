@@ -9,7 +9,7 @@
 class Ships: public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
 public:
-    Ships(int player_code,QGraphicsScene *scene,QGraphicsItem * parent=0,int health=20);
+    Ships(int player_code,QGraphicsScene *scene,int health=20,QGraphicsItem * parent=0);
 //                                    Player code = 1 for player 1
 //                                                = 2 for player 2
     void rotateTopoint(QPointF p);//Set rotaion with respect to point p
