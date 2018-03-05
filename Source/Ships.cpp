@@ -33,12 +33,16 @@ Ships::Ships(int player_code ,QGraphicsScene * scene,int health,QGraphicsItem *p
 
 
      //add healthbar
-     if(player_code==1)
+     if(player_code==1){
             healthbar = new QGraphicsRectItem(5,5,25,5);
-     else
+            healthbar->setBrush(QBrush(Qt::red,Qt::SolidPattern));
+
+     }
+     else{
             healthbar = new QGraphicsRectItem(15,40,25,5);
+            healthbar->setBrush(QBrush(Qt::blue,Qt::SolidPattern));
+     }
      healthbar->setPos(730,40);
-     healthbar->setBrush(QBrush(Qt::red,Qt::SolidPattern));
 
      healthbar->show();
      healthbar->setTransformOriginPoint(23,25);
@@ -152,7 +156,7 @@ void Ships::move_forward(){
 
     // move enemy forward at current angle
     distance++;
-    int STEP_SIZE = 10;
+    int STEP_SIZE = 5;
 
     double theta = rotation(); // degrees
 
