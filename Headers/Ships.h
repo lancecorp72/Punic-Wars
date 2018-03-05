@@ -15,6 +15,7 @@ public:
     void rotateTopoint(QPointF p);//Set rotaion with respect to point p
     void decreasehealth(int damage);
     QGraphicsRectItem * healthbar;
+    static int flag;
 public slots:
     void move_forward();              //Moves the ship forward
 private:
@@ -27,6 +28,7 @@ private:
     int pcode;
     int distance;
     QTimer * timer;
+
 
 };
 

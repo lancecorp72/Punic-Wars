@@ -80,6 +80,7 @@ Ships::Ships(int player_code ,QGraphicsScene * scene,int health,QGraphicsItem *p
 
 
 }
+ int Ships::flag=0;
 void Ships::decreasehealth(int damage)
 {
 
@@ -110,16 +111,20 @@ void Ships::rotateTopoint(QPointF p){
 
 void Ships::move_forward(){
 
+
+    if(Ships::flag==1)
+        timer->blockSignals(true);
     // if close to dest, rotate to next dest
     QLineF ln(pos(),dest);
     if (ln.length() < 10) {
         dest_index++;
         if(dest_index >= points.size())
         {
+            Ships::flag=1;
+
             if(pcode==1)
             {
 
-                timer->blockSignals(true);
                 QMessageBox::StandardButton reply = QMessageBox::information(game,
                                                   "Winner Winner Chicken Dinner", "Player 1 Wins",
                                          QMessageBox::Ok );
@@ -128,8 +133,6 @@ void Ships::move_forward(){
             else
             {
 
-
-                timer->blockSignals(true);
                 QMessageBox::StandardButton reply = QMessageBox::information(game,
                                                   "Winner Winner Chicken Dinner", "Player 2 Wins",
                                          QMessageBox::Ok );

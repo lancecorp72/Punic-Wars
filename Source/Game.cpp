@@ -26,6 +26,7 @@ Game::Game(){
     // set the scene
     setScene(scene);
 
+
     //Create Resoource display
     player1_resources = new Resource(1);
     player2_resources = new Resource(2);
