@@ -50,7 +50,17 @@ void Player1::keyPressEvent(QKeyEvent *event) {
 
                 //make cursor opaque after tower is placed
                 cur->setOpacity(1);
+            }
+            else{
 
+                deny = new QMediaPlayer();
+                deny -> setMedia(QUrl("qrc:/Sounds/Resources/Sounds/Error_alert.wav"));
+                if (deny ->state() == QMediaPlayer::PlayingState){
+                    deny ->setPosition(0);
+                }
+                else if (deny->state() == QMediaPlayer::StoppedState){
+                    deny->play();
+                }
             }
         }
 
@@ -189,7 +199,17 @@ void Player1::keyPressEvent(QKeyEvent *event) {
                 //make cursor opaque after tower is placed
                 cur1->setOpacity(1);
                 select2=false;
+            }
+            else{
 
+                deny = new QMediaPlayer();
+                deny -> setMedia(QUrl("qrc:/Sounds/Resources/Sounds/Error_alert.wav"));
+                if (deny ->state() == QMediaPlayer::PlayingState){
+                    deny ->setPosition(0);
+                }
+                else if (deny->state() == QMediaPlayer::StoppedState){
+                    deny->play();
+                }
             }
 
         }

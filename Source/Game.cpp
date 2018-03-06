@@ -9,6 +9,7 @@
 #include "Ships.h"
 #include "Resource.h"
 #include "Tutorial.h"
+
 Resource *player1_resources, *player2_resources;
 
 Game::Game(){
@@ -87,6 +88,13 @@ Game::Game(){
     p1->setFocus();
     scene->addItem(p1);*/
 
-
+    bgmusic = new QMediaPlayer();
+    bgmusic -> setMedia(QUrl("qrc:/Sounds/Resources/Sounds/background.mp3"));
+    if (bgmusic ->state() == QMediaPlayer::PlayingState){
+        bgmusic ->setPosition(0);
+    }
+    else if (bgmusic->state() == QMediaPlayer::StoppedState){
+        bgmusic->play();
+    }
     show();
 }

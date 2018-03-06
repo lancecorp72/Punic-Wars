@@ -14,6 +14,7 @@ public:
 
     //bollean function that returns if the tower is colliding with ship's path
     int iscolliding();
+
 };
 
 #endif // PATH_H
