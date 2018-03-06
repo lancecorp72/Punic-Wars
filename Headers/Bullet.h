@@ -5,20 +5,17 @@
 #include <QGraphicsPixmapItem>
 #include <QObject>
 #include <QGraphicsItem>
+#include "Tower.h"
 
 class Bullet: public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
 public:
-    Bullet(QGraphicsItem * parent=0);
+    Bullet(int d=5,QGraphicsItem * parent=0);
 public slots:
     void move();
-    double getMaxRange();
-    double getDistanceTravelled();
-    void setMaxRange(double rng);
-    void setDistanceTravelled(double dist);
 private:
     double maxRange;
     double distanceTravelled;
+    int damage;
 };
-
-#endif // BULLET_H
+#endif
