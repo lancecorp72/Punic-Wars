@@ -8,8 +8,11 @@
 #include <QDebug>
 #include "Ships.h"
 #include "Resource.h"
+#include "Thrd.h"
 
 Resource *player1_resources, *player2_resources;
+bool gameOn;
+
 
 Game::Game(){
     // create a scene
@@ -82,6 +85,6 @@ Game::Game(){
     p1->setFocus();
     scene->addItem(p1);
 
-
+    gameOn=true;
     show();
 }

@@ -17,6 +17,7 @@ public:
     QGraphicsRectItem * healthbar;
 public slots:
     void move_forward();              //Moves the ship forward
+    /*void delShip();*/
 private:
     QList<QPointF> points;            //List of points the ships have to traverse
     QPointF dest;                     //Dynamic Destinations
@@ -26,7 +27,7 @@ private:
     int max_h;
     int pcode;
     int distance;
-    QTimer * timer;
+
 
 };
 

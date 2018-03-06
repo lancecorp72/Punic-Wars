@@ -31,7 +31,8 @@ SOURCES += \
     Source/Player1.cpp \
     Source/Bullet.cpp \
     Source/Ships.cpp \
-    Source/Resource.cpp
+    Source/Resource.cpp \
+    Source/ShipThrd.cpp
 
 HEADERS += \
     Headers/Tower.h \
@@ -39,7 +40,9 @@ HEADERS += \
     Headers/Player1.h \
     Headers/Bullet.h \
     Headers/Ships.h \
-    Headers/Resource.h
+    Headers/Resource.h \
+    Headers/Thrd.h \
+    Headers/ShipThrd.h
 
 INCLUDEPATH += $$PWD/Headers
 

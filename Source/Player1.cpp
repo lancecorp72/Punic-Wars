@@ -7,8 +7,10 @@
 #include "Resource.h"
 #include "Ships.h"
 #include <QDebug>
+#include "Thrd.h"
 
 extern Resource *player1_resources, *player2_resources;
+//Thrd th;
 
 Player1::Player1(QGraphicsEllipseItem * c,QGraphicsEllipseItem *c2 ,QGraphicsItem * parent): QGraphicsPixmapItem(parent){
     select1=false;
@@ -38,7 +40,6 @@ void Player1::keyPressEvent(QKeyEvent *event) {
             if(t->x()<700&&cur->x()<700)
             {t->setPos(t->x()+50,t->y());
                 cur->setPos(cur->x()+50,cur->y());}
-
         }
         else if(event->key() == Qt::Key_Down) {
             if(t->y()<500&&cur->y()<500)
@@ -84,6 +85,8 @@ void Player1::keyPressEvent(QKeyEvent *event) {
             }
             player1_resources->decS(1);
             Ships * s=new Ships(1,scene());
+            th=new Thrd();
+            th->thrdset(s);
         }
         else if(event->key() == Qt::Key_Right) {
             if(cur->x()<700)
@@ -165,6 +168,8 @@ void Player1::keyPressEvent(QKeyEvent *event) {
             }
             player2_resources->decS(1);
             Ships * s=new Ships(2,scene());
+            th=new Thrd();
+            th->thrdset(s);
         }
         else if(event->key() == Qt::Key_D) {
             if(cur1->x()<1450)
