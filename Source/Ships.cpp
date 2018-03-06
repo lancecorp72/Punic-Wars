@@ -111,8 +111,6 @@ void Ships::move_forward(){
         dest_index++;
         if(dest_index >= points.size())
         {
-            if(pcode==1)
-            {
               if(!gameOn)
                 return;
               gameOn=false;
@@ -132,7 +130,7 @@ void Ships::move_forward(){
 
              game->close();
              return;
-         }
+        }
 
         dest = points[dest_index];
         rotateTopoint(dest);

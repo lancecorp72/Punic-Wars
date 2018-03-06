@@ -94,7 +94,6 @@ Game::Game(){
     else if (bgmusic->state() == QMediaPlayer::StoppedState){
         bgmusic->play();
     }
-    scene->addItem(p1);
 
     gameOn=true;
     show();
