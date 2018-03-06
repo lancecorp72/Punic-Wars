@@ -10,7 +10,7 @@
 class Bullet: public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
 public:
-    Bullet(int d=5,QGraphicsItem * parent=0);
+    Bullet(int d=4,QGraphicsItem * parent=0);
 public slots:
     void move();
 private:

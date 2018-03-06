@@ -6,7 +6,7 @@
 #include <QDebug>
 #include "ShipThrd.h"
 
-class Thrd : public QObject {
+class ShipMove : public QObject {
     Q_OBJECT
 public:
     void thrdset(Ships * s) {
@@ -18,7 +18,7 @@ public:
     }
 private:
     Ships * ship;
-    shipThrd sth;
+    ShipThrd sth;
 };
 
 #endif // THRD_H

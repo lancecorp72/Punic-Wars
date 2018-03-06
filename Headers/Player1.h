@@ -6,7 +6,8 @@
 #include <QGraphicsItem>
 #include "Tower.h"
 #include <QMediaPlayer>
-#include "Thrd.h"
+#include "ShipMove.h"
+#include "TowerShoot.h"
 
 
 class Player1: public QGraphicsPixmapItem {
@@ -21,6 +22,7 @@ private:
     Tower * t1;
     QGraphicsEllipseItem * cur;
     QGraphicsEllipseItem * cur1;
-    Thrd * th;
+    ShipMove * th;
+    TowerShoot * ts;
 };
 #endif // PLAYER1_H

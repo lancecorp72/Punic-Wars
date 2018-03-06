@@ -5,7 +5,8 @@
 #include <QObject>
 #include <QGraphicsItem>
 #include "Tower.h"
-#include "Thrd.h"
+#include "ShipMove.h"
+#include "TowerShoot.h"
 
 class Tutorial:public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
@@ -27,7 +28,8 @@ private:
     QGraphicsTextItem *text;
     QGraphicsTextItem *text2;
     QList<QGraphicsItem*> list;
-    Thrd * th;
+    ShipMove * th;
+    TowerShoot * ts;
 };
 
 #endif // TUTORIAL_H

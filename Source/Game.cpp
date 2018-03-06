@@ -9,7 +9,7 @@
 #include "Ships.h"
 #include "Resource.h"
 #include "Tutorial.h"
-#include "Thrd.h"
+#include "ShipMove.h"
 
 Resource *player1_resources, *player2_resources;
 bool gameOn;
