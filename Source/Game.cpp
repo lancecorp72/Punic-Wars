@@ -8,7 +8,7 @@
 #include <QDebug>
 #include "Ships.h"
 #include "Resource.h"
-
+#include "Tutorial.h"
 Resource *player1_resources, *player2_resources;
 
 Game::Game(){
@@ -25,7 +25,6 @@ Game::Game(){
 
     // set the scene
     setScene(scene);
-
 
     //Create Resoource display
     player1_resources = new Resource(1);
@@ -76,12 +75,17 @@ Game::Game(){
     ei2->setBrush(brush4);
     scene->addItem(ei2);
 
+    Tutorial *tut = new Tutorial(scene,ei,ei2);
 
-    // create a player
-    Player1 * p1 = new Player1(ei,ei2);
+     tut->setFlag(QGraphicsItem::ItemIsFocusable);
+    tut->setFocus();
+
+    scene->addItem(tut);
+
+    /*Player1 * p1 = new Player1(ei,ei2);
     p1->setFlag(QGraphicsItem::ItemIsFocusable);
     p1->setFocus();
-    scene->addItem(p1);
+    scene->addItem(p1);*/
 
 
     show();
