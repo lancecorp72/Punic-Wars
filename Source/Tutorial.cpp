@@ -165,7 +165,7 @@ void Tutorial::keyPressEvent(QKeyEvent *event) {
     }
 
     if(select1 == true) {        //tower is selected
-        if(event->key() == Qt::Key_Return) {
+        if(event->key() == Qt::Key_F) {
             //tower to start firing only after placed
             t->setNoFire();
             //cost is deducted when tower is placed
@@ -173,27 +173,28 @@ void Tutorial::keyPressEvent(QKeyEvent *event) {
             //make cursor opaque after tower is placed
             cur->setOpacity(1);
             select1=false;
-
-
+            //to check for targets periodically
+            ts=new TowerShoot();
+            ts->thrdset(t);
         }
         //movement controls for player 1
-        else if(event->key() == Qt::Key_Right) {
+        else if(event->key() == Qt::Key_D) {
             if(t->x()<700&&cur->x()<700)
             {t->setPos(t->x()+50,t->y());
                 cur->setPos(cur->x()+50,cur->y());}
 
         }
-        else if(event->key() == Qt::Key_Down) {
+        else if(event->key() == Qt::Key_S) {
             if(t->y()<500&&cur->y()<500)
             {t->setPos(t->x(),t->y()+50);
                 cur->setPos(cur->x(),cur->y()+50);}
         }
-        else if(event->key() == Qt::Key_Left) {
+        else if(event->key() == Qt::Key_A) {
             if(t->x()>0&&cur->x()>0)
             {t->setPos(t->x()-50,t->y());
                cur->setPos(cur->x()-50,cur->y());}
         }
-        else if(event->key() == Qt::Key_Up) {
+        else if(event->key() == Qt::Key_W) {
             if(t->y()>0&&cur->y()>0)
             {t->setPos(t->x(),t->y()-50);
                 cur->setPos(cur->x(),cur->y()-50);}
@@ -206,7 +207,7 @@ void Tutorial::keyPressEvent(QKeyEvent *event) {
         }
     }
     else {                      //no towers are selected
-        if(event->key() == Qt::Key_Return && cur->x()<100 && cur->y()<50&&stage>=4) {
+        if(event->key() == Qt::Key_F && cur->x()<100 && cur->y()<50&&stage>=4) {
             //if tower resource is less than cost, then don't select tower
             if(player1_resources->getT()==0) {
                 qInfo()<<"not enough bronze";
@@ -220,7 +221,7 @@ void Tutorial::keyPressEvent(QKeyEvent *event) {
             cur->setOpacity(0);
             list.append(t);
         }
-        else if(event->key() == Qt::Key_Return && cur->x()<100 && cur->y()<100&&stage>=5) {
+        else if(event->key() == Qt::Key_F && cur->x()<100 && cur->y()<100&&stage>=5) {
             //if ship resource is less than cost, then ships are not created
             if(player1_resources->getS()==0) {
                 qInfo()<<"not enough iron";
@@ -228,31 +229,31 @@ void Tutorial::keyPressEvent(QKeyEvent *event) {
             }
             player1_resources->decS(1);
             Ships * s=new Ships(3,scene());
-            th=new Thrd();
+            th=new ShipMove();
             th->thrdset(s);
             list.append(s);
             list.append(s->healthbar);
         }
-        else if(event->key() == Qt::Key_Right) {
+        else if(event->key() == Qt::Key_D) {
             if(cur->x()<700)
                 cur->setPos(cur->x()+50,cur->y());
         }
-        else if(event->key() == Qt::Key_Down) {
+        else if(event->key() == Qt::Key_S) {
             if(cur->y()<500)
                 cur->setPos(cur->x(),cur->y()+50);
         }
-        else if(event->key() == Qt::Key_Left) {
+        else if(event->key() == Qt::Key_A) {
             if(cur->x()>0)
                cur->setPos(cur->x()-50,cur->y());
         }
-        else if(event->key() == Qt::Key_Up) {
+        else if(event->key() == Qt::Key_W) {
             if(cur->y()>0)
                 cur->setPos(cur->x(),cur->y()-50);
         }
     }
     //player 2
     if(select2 == true) {        //tower is selected
-        if(event->key() == Qt::Key_F) {
+        if(event->key() == Qt::Key_Return) {
             //tower to start firing only after placed
             t1->setNoFire();
             //cost is deducted when tower is placed
@@ -260,26 +261,28 @@ void Tutorial::keyPressEvent(QKeyEvent *event) {
             //make cursor opaque after tower is placed
             cur1->setOpacity(1);
             select2=false;
-
+            //to check for targets periodically
+            ts=new TowerShoot();
+            ts->thrdset(t);
         }
         //movement controls for player 2
-        else if(event->key() == Qt::Key_D) {
+        else if(event->key() == Qt::Key_Right) {
             if(t1->x()<1450&&cur1->x()<1450)
             {t1->setPos(t1->x()+50,t1->y());
                 cur1->setPos(cur1->x()+50,cur1->y());}
 
         }
-        else if(event->key() == Qt::Key_S) {
+        else if(event->key() == Qt::Key_Down) {
             if(t1->y()<500&&cur1->y()<500)
             {t1->setPos(t1->x(),t1->y()+50);
                 cur1->setPos(cur1->x(),cur1->y()+50);}
         }
-        else if(event->key() == Qt::Key_A) {
+        else if(event->key() == Qt::Key_Left) {
             if(t1->x()>800&&cur1->x()>800)
             {t1->setPos(t1->x()-50,t1->y());
                cur1->setPos(cur1->x()-50,cur1->y());}
         }
-        else if(event->key() == Qt::Key_W) {
+        else if(event->key() == Qt::Key_Up) {
             if(t1->y()>0&&cur1->y()>0)
             {t1->setPos(t1->x(),t1->y()-50);
                 cur1->setPos(cur1->x(),cur1->y()-50);}
@@ -292,7 +295,7 @@ void Tutorial::keyPressEvent(QKeyEvent *event) {
         }
     }
     else {                      //no towers are selected
-        if(event->key() == Qt::Key_F && cur1->x()>=1400 && cur1->y()<50&&stage>=4) {
+        if(event->key() == Qt::Key_Return && cur1->x()>=1400 && cur1->y()<50&&stage>=4) {
             //if tower resource is less than cost, then don't select tower
             if(player2_resources->getT()==0) {
                 qInfo()<<"not enough bronze";
@@ -306,7 +309,7 @@ void Tutorial::keyPressEvent(QKeyEvent *event) {
             cur1->setOpacity(0);
             list.append(t1);
         }
-        else if(event->key() == Qt::Key_F && cur1->x()>=1400 && cur1->y()<100&&stage>=5) {
+        else if(event->key() == Qt::Key_Return && cur1->x()>=1400 && cur1->y()<100&&stage>=5) {
             //if ship resource is less than cost, then ships are not created
             if(player2_resources->getS()==0) {
                 qInfo()<<"not enough iron";
@@ -314,26 +317,26 @@ void Tutorial::keyPressEvent(QKeyEvent *event) {
             }
             player2_resources->decS(1);
             Ships * s=new Ships(4,scene());
-            th=new Thrd();
+            th=new ShipMove();
             th->thrdset(s);
             list.append(s);
             list.append(s->healthbar);
 
         }
-        else if(event->key() == Qt::Key_D) {
+        else if(event->key() == Qt::Key_Right) {
             if(cur1->x()<1450)
                 cur1->setPos(cur1->x()+50,cur1->y());
         }
-        else if(event->key() == Qt::Key_S) {
+        else if(event->key() == Qt::Key_Down) {
             if(cur1->y()<500)
                 cur1->setPos(cur1->x(),cur1->y()+50);
         }
-        else if(event->key() == Qt::Key_A) {
+        else if(event->key() == Qt::Key_Left) {
             if(cur1->x()>800)
                cur1->setPos(cur1->x()-50,cur1->y());
 
         }
-        else if(event->key() == Qt::Key_W) {
+        else if(event->key() == Qt::Key_Up) {
             if(cur1->y()>0)
                 cur1->setPos(cur1->x(),cur1->y()-50);
         }

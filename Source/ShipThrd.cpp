@@ -2,7 +2,7 @@
 
 extern bool gameOn;
 
-void shipThrd::run() {
+void ShipThrd::run() {
     while(s->x()>-30 && s->x()<1490 && gameOn) {
         msleep(100);
         emit flag();
@@ -13,7 +13,7 @@ void shipThrd::run() {
     if(gameOn)
         emit finished();
 }
-void shipThrd::setShip(Ships *temp)
+void ShipThrd::setShip(Ships *temp)
 {
     s=temp;
 }

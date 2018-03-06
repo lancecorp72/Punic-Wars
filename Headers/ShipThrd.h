@@ -5,7 +5,7 @@
 #include "Ships.h"
 #include <QDebug>
 
-class shipThrd : public QThread {
+class ShipThrd : public QThread {
     Q_OBJECT
 public:
     void setShip(Ships *);

@@ -41,10 +41,10 @@ Tower::Tower(QGraphicsItem *parent):QObject(), QGraphicsPixmapItem(parent) {
     QLineF ln(poly_center,tower_center);
     attack_area->setPos(x()+ln.dx(),y()+ln.dy());
 
-    // connect a timer to attack_target
+    /*// connect a timer to attack_target
     QTimer * timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(get_target()));
-    timer->start(700);
+    timer->start(700);*/
 
 
     //initialize bool variables

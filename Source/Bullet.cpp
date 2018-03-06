@@ -43,15 +43,12 @@ void Bullet::move() {
         if (typeid(*(colliding_items[i])) == typeid(Ships)) { 
 
                 // remove them from the scene (still on the heap)
-                               Ships *s =(Ships *)colliding_items[i];
+                Ships *s =(Ships *)colliding_items[i];
+                s->decreasehealth(damage);
+                scene()->removeItem(this);
 
-                               s->decreasehealth(damage);
-
-                               scene()->removeItem(this);
-
-                               // delete them from the heap to save memory
-
-                               delete this;
+                // delete them from the heap to save memory
+                delete this;
 
                 // return (all code below refers to a non existant bullet)
                 return;

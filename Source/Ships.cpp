@@ -64,7 +64,7 @@ Ships::Ships(int player_code ,QGraphicsScene * scene,int health,QGraphicsItem *p
     {
         points << QPointF(525,40)                           //Horizontal Segment 1
                << QPointF(525,140) << QPointF(415,140)     //Segment 2
-               << QPointF(415,40) << QPointF(285,40)      //Segment 3
+               << QPointF(415,40)  << QPointF(285,40)      //Segment 3
                << QPointF(285,250) << QPointF(410,250)    //Segment 4
                << QPointF(410,445) << QPointF(285,445)    //Segment 5
                << QPointF(285,355) << QPointF(160,355)    //Segment 6
@@ -81,10 +81,10 @@ void Ships::decreasehealth(int damage)
 {
 
  h=h-damage;
-  //If possible , reduce health
- if(h>0 && pcode%2==0)          //for player 1
+ //If possible , reduce health
+ if(h>0 && pcode%2==0)          //for player 2
         healthbar->setRect(15,40,h*25/max_h,5);
- if(h>0)                        //for player 2
+ else if(h>0)                   //for player 1
         healthbar->setRect(5,5,h*25/max_h,5);
  else           // else destroy ship
  {
