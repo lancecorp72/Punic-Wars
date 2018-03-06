@@ -7,6 +7,8 @@
 #include "Resource.h"
 #include "Ships.h"
 #include <QDebug>
+#include "Path.h"
+#include "Game.h"
 
 extern Resource *player1_resources, *player2_resources;
 
@@ -21,70 +23,131 @@ Player1::Player1(QGraphicsEllipseItem * c,QGraphicsEllipseItem *c2 ,QGraphicsIte
    }
 
 void Player1::keyPressEvent(QKeyEvent *event) {
+
     //player 1
-    if(select1 == true) {        //tower is selected
+    if(select1 == true) {
+
+        //tower is selected
+        t -> setPixmap(QPixmap(":/Resources/images/towByes.png"));
+
         if(event->key() == Qt::Key_Return) {
+
+            Path *waters1 = new Path();
+            int c1 = waters1->iscolliding();
+
             //tower to start firing only after placed
             t->setNoFire();
-            //cost is deducted when tower is placed
-            player1_resources->decT(1);
-            //make cursor opaque after tower is placed
-            cur->setOpacity(1);
-            select1=false;
 
+            //cost is deducted when tower is placed
+            if(c1 == 0){
+
+                //Place only if tower is not in ship's path
+                t -> setPixmap(QPixmap(":/Resources/images/towB.png"));
+                player1_resources->decT(1);
+
+                //Place the tower
+                select1=false;
+
+                //make cursor opaque after tower is placed
+                cur->setOpacity(1);
+
+            }
         }
+
         //movement controls for player 1
         else if(event->key() == Qt::Key_Right) {
-            if(t->x()<700&&cur->x()<700)
-            {t->setPos(t->x()+50,t->y());
-                cur->setPos(cur->x()+50,cur->y());}
+            if(t->x()<700&&cur->x()<700){
+
+                //Move Right
+                t->setPos(t->x()+50,t->y());
+                cur->setPos(cur->x()+50,cur->y());
+
+                //Check if colliding with ship's path
+                Path *waters1 = new Path();
+                int c1 = waters1->iscolliding();
+
+            }
 
         }
         else if(event->key() == Qt::Key_Down) {
-            if(t->y()<500&&cur->y()<500)
-            {t->setPos(t->x(),t->y()+50);
-                cur->setPos(cur->x(),cur->y()+50);}
+            if(t->y()<500&&cur->y()<500){
+
+                //Move Down
+                t->setPos(t->x(),t->y()+50);
+                cur->setPos(cur->x(),cur->y()+50);
+
+                //Check if colliding with ship's path
+                Path *waters1 = new Path();
+                int c1 = waters1->iscolliding();
+            }
         }
         else if(event->key() == Qt::Key_Left) {
-            if(t->x()>0&&cur->x()>0)
-            {t->setPos(t->x()-50,t->y());
-               cur->setPos(cur->x()-50,cur->y());}
+            if(t->x()>0&&cur->x()>0){
+
+                //Move Left
+                t->setPos(t->x()-50,t->y());
+               cur->setPos(cur->x()-50,cur->y());
+
+               //Check if colliding with ship's path
+               Path *waters1 = new Path();
+               int c1 = waters1->iscolliding();
+            }
         }
         else if(event->key() == Qt::Key_Up) {
-            if(t->y()>0&&cur->y()>0)
-            {t->setPos(t->x(),t->y()-50);
-                cur->setPos(cur->x(),cur->y()-50);}
+            if(t->y()>0&&cur->y()>0){
+
+                //Move up
+                t->setPos(t->x(),t->y()-50);
+                cur->setPos(cur->x(),cur->y()-50);
+
+                //Check if colliding with ship's path
+                Path *waters1 = new Path();
+                int c1 = waters1->iscolliding();
+            }
         }
-        else if(event->key() == Qt::Key_Escape) {
-            //make cursor opaque
+        else if(event->key() == Qt::Key_Backspace) {
+
+            //make cursor opaque and delete temporary object
             cur->setOpacity(1);
             delete t;
             select1=false;
         }
     }
-    else {                      //no towers are selected
+
+    else {
+
+        //no towers are selected
         if(event->key() == Qt::Key_Return && cur->x()<100 && cur->y()<50) {
+
             //if tower resource is less than cost, then don't select tower
             if(player1_resources->getT()==0) {
                 qInfo()<<"not enough bronze";
                 return;
             }
+
+            //Create temporary Tower
             select1=true;
             t=new Tower();
             t->setPos(cur->x(),cur->y());
             scene()->addItem(t);
+
             //make cursor transparent when tower is selected
             cur->setOpacity(0);
         }
         else if(event->key() == Qt::Key_Return && cur->x()<100 && cur->y()<100) {
+
             //if ship resource is less than cost, then ships are not created
             if(player1_resources->getS()==0) {
                 qInfo()<<"not enough iron";
                 return;
             }
+
+            //Else Ships are added
             player1_resources->decS(1);
             Ships * s=new Ships(1,scene());
         }
+
+        //Moving cursor
         else if(event->key() == Qt::Key_Right) {
             if(cur->x()<700)
                 cur->setPos(cur->x()+50,cur->y());
@@ -102,70 +165,131 @@ void Player1::keyPressEvent(QKeyEvent *event) {
                 cur->setPos(cur->x(),cur->y()-50);
         }
     }
+
     //player 2
-    if(select2 == true) {        //tower is selected
+    if(select2 == true) {
+
+        //tower is selected
+        t1 -> setPixmap(QPixmap(":/Resources/images/towByes.png"));
+
         if(event->key() == Qt::Key_F) {
+            Path *waters2 = new Path();
+            int c2 = waters2->iscolliding();
+
             //tower to start firing only after placed
             t1->setNoFire();
+
             //cost is deducted when tower is placed
-            player2_resources->decT(1);
-            //make cursor opaque after tower is placed
-            cur1->setOpacity(1);
-            select2=false;
+            if(c2 == 0){
+
+                //Place only if tower is not in ship's path
+                t1 -> setPixmap(QPixmap(":/Resources/images/towB.png"));
+                player2_resources->decT(1);
+
+                //make cursor opaque after tower is placed
+                cur1->setOpacity(1);
+                select2=false;
+
+            }
 
         }
+
         //movement controls for player 2
         else if(event->key() == Qt::Key_D) {
-            if(t1->x()<1450&&cur1->x()<1450)
-            {t1->setPos(t1->x()+50,t1->y());
-                cur1->setPos(cur1->x()+50,cur1->y());}
+
+            //Move Right
+            if(t1->x()<1450&&cur1->x()<1450){
+
+                t1->setPos(t1->x()+50,t1->y());
+                cur1->setPos(cur1->x()+50,cur1->y());
+
+                //Check if colliding with ship's path
+                Path *waters2 = new Path();
+                int c2 = waters2->iscolliding();
+            }
 
         }
         else if(event->key() == Qt::Key_S) {
-            if(t1->y()<500&&cur1->y()<500)
-            {t1->setPos(t1->x(),t1->y()+50);
-                cur1->setPos(cur1->x(),cur1->y()+50);}
+
+            //Move Down
+            if(t1->y()<500&&cur1->y()<500){
+
+                t1->setPos(t1->x(),t1->y()+50);
+                cur1->setPos(cur1->x(),cur1->y()+50);
+
+                //Check if colliding with ship's path
+                Path *waters2 = new Path();
+                int c2 = waters2->iscolliding();
+            }
         }
         else if(event->key() == Qt::Key_A) {
-            if(t1->x()>800&&cur1->x()>800)
-            {t1->setPos(t1->x()-50,t1->y());
-               cur1->setPos(cur1->x()-50,cur1->y());}
+
+            //Move Left
+            if(t1->x()>800&&cur1->x()>800){
+
+               t1->setPos(t1->x()-50,t1->y());
+               cur1->setPos(cur1->x()-50,cur1->y());
+
+               //Check if colliding with ship's path
+               Path *waters2 = new Path();
+               int c2 = waters2->iscolliding();
+            }
         }
         else if(event->key() == Qt::Key_W) {
-            if(t1->y()>0&&cur1->y()>0)
-            {t1->setPos(t1->x(),t1->y()-50);
-                cur1->setPos(cur1->x(),cur1->y()-50);}
+
+            //Move Up
+            if(t1->y()>0&&cur1->y()>0){
+
+                t1->setPos(t1->x(),t1->y()-50);
+                cur1->setPos(cur1->x(),cur1->y()-50);
+
+                //Check if colliding with ship's path
+                Path *waters2 = new Path();
+                int c2 = waters2->iscolliding();
+            }
         }
-        else if(event->key() == Qt::Key_Backspace) {
-            //make cursor opaque
+        else if(event->key() == Qt::Key_Escape) {
+
+            //make cursor opaque and delete temporary tower
             cur1->setOpacity(1);
             delete t1;
             select2=false;
         }
     }
-    else {                      //no towers are selected
+    else {
+
+        //no towers are selected
         if(event->key() == Qt::Key_F && cur1->x()>=1400 && cur1->y()<50) {
+
             //if tower resource is less than cost, then don't select tower
             if(player2_resources->getT()==0) {
                 qInfo()<<"not enough bronze";
                 return;
             }
+
+            //Creating Temporary tower and add it to scene
             select2=true;
             t1=new Tower();
             t1->setPos(cur1->x(),cur1->y());
             scene()->addItem(t1);
+
             //make cursor transparent when tower is selected
             cur1->setOpacity(0);
         }
         else if(event->key() == Qt::Key_F && cur1->x()>=1400 && cur1->y()<100) {
+
             //if ship resource is less than cost, then ships are not created
             if(player2_resources->getS()==0) {
                 qInfo()<<"not enough iron";
                 return;
             }
+
+            //Else create ship and add to scene
             player2_resources->decS(1);
             Ships * s=new Ships(2,scene());
         }
+
+        //Moving cursor
         else if(event->key() == Qt::Key_D) {
             if(cur1->x()<1450)
                 cur1->setPos(cur1->x()+50,cur1->y());
@@ -183,7 +307,6 @@ void Player1::keyPressEvent(QKeyEvent *event) {
             if(cur1->y()>0)
                 cur1->setPos(cur1->x(),cur1->y()-50);
         }
-
     }
 }
 
