@@ -10,18 +10,15 @@ class Thrd : public QObject {
     Q_OBJECT
 public:
     void thrdset(Ships * s) {
-        //QThread * q = new QThread();
         ship=s;
-        smp.setShip(s);
-        //connect(&smp,SIGNAL(started()),&smp,SLOT(run()));
-        connect(&smp,SIGNAL(flag()),ship,SLOT(move_forward()));
-        connect(&smp,SIGNAL(finished()),&smp,SLOT(quit()));
-        connect(&smp,SIGNAL(finished()),ship,SLOT(deleteLater()));
-        smp.start();
+        sth.setShip(s);
+        connect(&sth,SIGNAL(flag()),ship,SLOT(move_forward()));
+        connect(&sth,SIGNAL(finished()),&sth,SLOT(quit()));
+        sth.start();
     }
 private:
     Ships * ship;
-    shipThrd smp;
+    shipThrd sth;
 };
 
 #endif // THRD_H

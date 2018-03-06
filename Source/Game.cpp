@@ -79,11 +79,10 @@ Game::Game(){
     ei2->setBrush(brush4);
     scene->addItem(ei2);
 
+    gameOn=true;
     Tutorial *tut = new Tutorial(scene,ei,ei2);
-
     tut->setFlag(QGraphicsItem::ItemIsFocusable);
     tut->setFocus();
-
     scene->addItem(tut);
 
     bgmusic = new QMediaPlayer();
@@ -95,6 +94,5 @@ Game::Game(){
         bgmusic->play();
     }
 
-    gameOn=true;
     show();
 }

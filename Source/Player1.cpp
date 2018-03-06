@@ -20,7 +20,6 @@ Player1::Player1(QGraphicsEllipseItem * c,QGraphicsEllipseItem *c2 ,QGraphicsIte
     t1= NULL;
     cur=c;
     cur1=c2;
-    cur1->setPos(1450,0);
    }
 
 void Player1::keyPressEvent(QKeyEvent *event) {

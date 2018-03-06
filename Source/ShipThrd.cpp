@@ -7,6 +7,9 @@ void shipThrd::run() {
         msleep(100);
         emit flag();
     }
+
+    if(s->x()==-60 && s->getPcode()<=2)
+        s->delShip();
     if(gameOn)
         emit finished();
 }
