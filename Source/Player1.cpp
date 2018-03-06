@@ -7,6 +7,8 @@
 #include "Resource.h"
 #include "Ships.h"
 #include <QDebug>
+#include "Path.h"
+#include "Game.h"
 
 extern Resource *player1_resources, *player2_resources;
 
@@ -24,14 +26,20 @@ void Player1::keyPressEvent(QKeyEvent *event) {
     //player 1
     if(select1 == true) {        //tower is selected
         if(event->key() == Qt::Key_Return) {
+
+            Path *waters1 = new Path();
+            int c1 = waters1->iscolliding();
+
             //tower to start firing only after placed
             t->setNoFire();
-            //cost is deducted when tower is placed
-            player1_resources->decT(1);
-            //make cursor opaque after tower is placed
-            cur->setOpacity(1);
-            select1=false;
 
+            //cost is deducted when tower is placed
+            if(c1 == 0){
+                player1_resources->decT(1);
+                select1=false;
+                //make cursor opaque after tower is placed
+                cur->setOpacity(1);
+            }
         }
         //movement controls for player 1
         else if(event->key() == Qt::Key_Right) {
@@ -105,13 +113,18 @@ void Player1::keyPressEvent(QKeyEvent *event) {
     //player 2
     if(select2 == true) {        //tower is selected
         if(event->key() == Qt::Key_F) {
+            Path *waters2 = new Path();
+            int c2 = waters2->iscolliding();
             //tower to start firing only after placed
             t1->setNoFire();
             //cost is deducted when tower is placed
-            player2_resources->decT(1);
-            //make cursor opaque after tower is placed
-            cur1->setOpacity(1);
-            select2=false;
+            if(c2 == 0){
+                player2_resources->decT(1);
+                //make cursor opaque after tower is placed
+                cur1->setOpacity(1);
+                select2=false;
+
+            }
 
         }
         //movement controls for player 2
