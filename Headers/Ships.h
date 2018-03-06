@@ -18,6 +18,7 @@ public:
     QGraphicsRectItem * healthbar;
     int getPcode();
     QMediaPlayer *win;
+    QMediaPlayer *splash;
 public slots:
     void move_forward();              //Moves the ship forward
     void delShip();

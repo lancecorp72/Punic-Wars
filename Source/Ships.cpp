@@ -88,6 +88,9 @@ void Ships::decreasehealth(int damage)
         healthbar->setRect(5,5,h*25/max_h,5);
  else           // else destroy ship
  {
+     splash = new QMediaPlayer();
+     splash -> setMedia(QUrl("qrc:/Sounds/Resources/Sounds/splash.wav"));
+         splash->play();
      setPos(-60,-10);
      //when ship is destroyed, resource is increased for attacking player
      if(pcode%2 == 1) {
