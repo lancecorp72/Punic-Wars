@@ -37,6 +37,7 @@ int Path::iscolliding()
     for (size_t i = 0, n = colliding_items.size(); i < n; i++){
         Tower * tow = dynamic_cast<Tower *>(colliding_items[i]);
         if (tow){
+            tow -> setPixmap(QPixmap(":/Resources/images/towBno.png"));
             return 1;           //Collides
         }
     }

@@ -8,5 +8,7 @@
         <file>Resources/images/towB.png</file>
         <file>Resources/images/boat2.png</file>
         <file>Resources/images/boat1.png</file>
+        <file>Resources/images/towBno.png</file>
+        <file>Resources/images/towByes.png</file>
     </qresource>
 </RCC>
