@@ -35,7 +35,8 @@ SOURCES += \
     Source/Path.cpp \
     Source/Tutorial.cpp \
     Source/ShipThrd.cpp \
-    Source/TowerThrd.cpp
+    Source/TowerThrd.cpp \
+    Source/BulletThrd.cpp
 
 HEADERS += \
     Headers/Tower.h \
@@ -49,7 +50,9 @@ HEADERS += \
     Headers/ShipThrd.h \
     Headers/TowerThrd.h \
     Headers/ShipMove.h \
-    Headers/TowerShoot.h
+    Headers/TowerShoot.h \
+    Headers/BulletThrd.h \
+    Headers/BulletMove.h
 
 INCLUDEPATH += $$PWD/Headers
 

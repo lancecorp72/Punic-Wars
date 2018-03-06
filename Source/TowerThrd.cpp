@@ -8,7 +8,6 @@ void TowerThrd::run() {
         emit flag();
     }
 }
-void TowerThrd::setTower(Tower *temp)
-{
+void TowerThrd::setTower(Tower *temp) {
     t=temp;
 }

@@ -20,6 +20,8 @@ Player1::Player1(QGraphicsEllipseItem * c,QGraphicsEllipseItem *c2 ,QGraphicsIte
     t1= NULL;
     cur=c;
     cur1=c2;
+    th=NULL;
+    ts=NULL;
    }
 
 void Player1::keyPressEvent(QKeyEvent *event) {
@@ -76,7 +78,7 @@ void Player1::keyPressEvent(QKeyEvent *event) {
 
                 //Check if colliding with ship's path
                 Path *waters1 = new Path();
-                int c1 = waters1->iscolliding();
+                waters1->iscolliding();
 
             }
 
@@ -94,19 +96,19 @@ void Player1::keyPressEvent(QKeyEvent *event) {
 
                 //Check if colliding with ship's path
                 Path *waters1 = new Path();
-                int c1 = waters1->iscolliding();
+                waters1->iscolliding();
             }
         }
         else if(event->key() == Qt::Key_A) {
             if(t->x()>0&&cur->x()>0){
 
-                //Move Left
-                t->setPos(t->x()-50,t->y());
+               //Move Left
+               t->setPos(t->x()-50,t->y());
                cur->setPos(cur->x()-50,cur->y());
 
                //Check if colliding with ship's path
                Path *waters1 = new Path();
-               int c1 = waters1->iscolliding();
+               waters1->iscolliding();
             }
         }
         else if(event->key() == Qt::Key_W) {
@@ -118,7 +120,7 @@ void Player1::keyPressEvent(QKeyEvent *event) {
 
                 //Check if colliding with ship's path
                 Path *waters1 = new Path();
-                int c1 = waters1->iscolliding();
+                waters1->iscolliding();
             }
         }
         else if(event->key() == Qt::Key_Escape) {
@@ -210,7 +212,7 @@ void Player1::keyPressEvent(QKeyEvent *event) {
 
                 //to check for targets periodically
                 ts=new TowerShoot();
-                ts->thrdset(t);
+                ts->thrdset(t1);
             }
             else{
 
@@ -237,7 +239,7 @@ void Player1::keyPressEvent(QKeyEvent *event) {
 
                 //Check if colliding with ship's path
                 Path *waters2 = new Path();
-                int c2 = waters2->iscolliding();
+                waters2->iscolliding();
             }
 
         }
@@ -251,7 +253,7 @@ void Player1::keyPressEvent(QKeyEvent *event) {
 
                 //Check if colliding with ship's path
                 Path *waters2 = new Path();
-                int c2 = waters2->iscolliding();
+                waters2->iscolliding();
             }
         }
         else if(event->key() == Qt::Key_Left) {
@@ -264,7 +266,7 @@ void Player1::keyPressEvent(QKeyEvent *event) {
 
                //Check if colliding with ship's path
                Path *waters2 = new Path();
-               int c2 = waters2->iscolliding();
+               waters2->iscolliding();
             }
         }
         else if(event->key() == Qt::Key_Up) {
@@ -277,7 +279,7 @@ void Player1::keyPressEvent(QKeyEvent *event) {
 
                 //Check if colliding with ship's path
                 Path *waters2 = new Path();
-                int c2 = waters2->iscolliding();
+                waters2->iscolliding();
             }
         }
         else if(event->key() == Qt::Key_Backspace) {
@@ -335,7 +337,6 @@ void Player1::keyPressEvent(QKeyEvent *event) {
         else if(event->key() == Qt::Key_Left) {
             if(cur1->x()>800)
                cur1->setPos(cur1->x()-50,cur1->y());
-
         }
         else if(event->key() == Qt::Key_Up) {
             if(cur1->y()>0)

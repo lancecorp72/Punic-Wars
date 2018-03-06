@@ -74,7 +74,7 @@ void Tutorial::keyPressEvent(QKeyEvent *event) {
     }
     if(stage==2)
     {                                                              //Player 1 Movement controls
-        text2= s1->addText("This is your cursor Player 1, Use arrow keys to move. Try now");
+        text2= s1->addText("This is your cursor Player 1, Use W/A/S/D to move. Try now");
         cur->show();
 
         text2->setPos(120,150);
@@ -89,7 +89,7 @@ void Tutorial::keyPressEvent(QKeyEvent *event) {
     else if(stage==3&&event->key()==Qt::Key_E)
     {
         s1->removeItem(text2);                                   //Player 2 Movement controls
-        text2= s1->addText("This is your cursor Player 2, Use W/A/S/D to move. Try now");
+        text2= s1->addText("This is your cursor Player 2, Use arrow keys to move. Try now");
         cur1->show();
 
         text2->setPos(700,150);
@@ -103,7 +103,7 @@ void Tutorial::keyPressEvent(QKeyEvent *event) {
     else if(stage==4&&event->key()==Qt::Key_E)
     {                               //Create tower
         s1->removeItem(text2);
-        text2= s1->addText("To select a tower move your cursor over the Tower icon and press Enter(Player1) or F(Player2)");
+        text2= s1->addText("To select a tower move your cursor over the Tower icon and press F(Player1) or Enter(Player2)");
 
 
         text2->setPos(300,150);
@@ -116,7 +116,7 @@ void Tutorial::keyPressEvent(QKeyEvent *event) {
     else if(stage==5&&event->key()==Qt::Key_E)  //Creating a ship
     {
         s1->removeItem(text2);
-        text2= s1->addText("To create a ship move your cursor over the Ship icon and press Enter(Player1) or F(Pelayer2)");
+        text2= s1->addText("To create a ship move your cursor over the Ship icon and press F(Player1) or Enter(Player2)");
 
 
         text2->setPos(300,150);
@@ -263,7 +263,7 @@ void Tutorial::keyPressEvent(QKeyEvent *event) {
             select2=false;
             //to check for targets periodically
             ts=new TowerShoot();
-            ts->thrdset(t);
+            ts->thrdset(t1);
         }
         //movement controls for player 2
         else if(event->key() == Qt::Key_Right) {
