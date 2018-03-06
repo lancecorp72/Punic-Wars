@@ -5,6 +5,7 @@
 #include <QObject>
 #include <QGraphicsItem>
 #include "Tower.h"
+#include "Thrd.h"
 
 class Tutorial:public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
@@ -25,8 +26,8 @@ private:
     int stage;
     QGraphicsTextItem *text;
     QGraphicsTextItem *text2;
-     QList<QGraphicsItem*> list;
-
+    QList<QGraphicsItem*> list;
+    Thrd * th;
 };
 
 #endif // TUTORIAL_H

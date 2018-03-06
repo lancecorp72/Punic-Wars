@@ -14,6 +14,7 @@
 #include <QTimer>
 
 extern Resource *player1_resources, *player2_resources;
+extern bool gameOn;
 
 Tutorial::Tutorial(QGraphicsScene *s,QGraphicsEllipseItem * c,QGraphicsEllipseItem *c2 ,QGraphicsItem * parent): QGraphicsPixmapItem(parent){
     select1=false;
@@ -49,17 +50,14 @@ Tutorial::Tutorial(QGraphicsScene *s,QGraphicsEllipseItem * c,QGraphicsEllipseIt
 }
 void Tutorial::nothing(QGraphicsTextItem *text,int limit)  // Animation
 {
-    if(timecount==limit)
-    {
+    if(timecount==limit) {
         timecount=0;
-
-
-
     }
+
     if(timecount%2==0)
-    text->setDefaultTextColor(Qt::white);
+        text->setDefaultTextColor(Qt::white);
     else
-    text->setDefaultTextColor(Qt::gray);
+        text->setDefaultTextColor(Qt::gray);
     timecount++;
 
 
@@ -150,6 +148,9 @@ void Tutorial::keyPressEvent(QKeyEvent *event) {
         player2_resources = new Resource(2);
         s1->addItem(player1_resources);
         s1->addItem(player2_resources);
+        cur->setOpacity(1);
+        cur1->setOpacity(1);
+        gameOn=true;
 
         //Add player
         Player1 * p1 = new Player1(cur,cur1);
@@ -159,8 +160,8 @@ void Tutorial::keyPressEvent(QKeyEvent *event) {
 
         //delete items created in tutorial
         QList<QGraphicsItem*>::iterator i;
-        for (i = list.begin(); i != list.end(); ++i)
-            s1->removeItem(*i);
+        for (int i=0;i<list.size();i++)
+            s1->removeItem(list[i]);
     }
 
     if(select1 == true) {        //tower is selected
@@ -172,7 +173,7 @@ void Tutorial::keyPressEvent(QKeyEvent *event) {
             //make cursor opaque after tower is placed
             cur->setOpacity(1);
             select1=false;
-            list.append(t);
+
 
         }
         //movement controls for player 1
@@ -217,6 +218,7 @@ void Tutorial::keyPressEvent(QKeyEvent *event) {
             scene()->addItem(t);
             //make cursor transparent when tower is selected
             cur->setOpacity(0);
+            list.append(t);
         }
         else if(event->key() == Qt::Key_Return && cur->x()<100 && cur->y()<100&&stage>=5) {
             //if ship resource is less than cost, then ships are not created
@@ -225,7 +227,9 @@ void Tutorial::keyPressEvent(QKeyEvent *event) {
                 return;
             }
             player1_resources->decS(1);
-            Ships * s=new Ships(1,scene());
+            Ships * s=new Ships(3,scene());
+            th=new Thrd();
+            th->thrdset(s);
             list.append(s);
             list.append(s->healthbar);
         }
@@ -309,7 +313,9 @@ void Tutorial::keyPressEvent(QKeyEvent *event) {
                 return;
             }
             player2_resources->decS(1);
-            Ships * s=new Ships(2,scene());
+            Ships * s=new Ships(4,scene());
+            th=new Thrd();
+            th->thrdset(s);
             list.append(s);
             list.append(s->healthbar);
 

@@ -9,7 +9,11 @@
 #include "Ships.h"
 #include "Resource.h"
 #include "Tutorial.h"
+#include "Thrd.h"
+
 Resource *player1_resources, *player2_resources;
+bool gameOn;
+
 
 Game::Game(){
     // create a scene
@@ -75,18 +79,20 @@ Game::Game(){
     ei2->setBrush(brush4);
     scene->addItem(ei2);
 
+    gameOn=true;
     Tutorial *tut = new Tutorial(scene,ei,ei2);
-
-     tut->setFlag(QGraphicsItem::ItemIsFocusable);
+    tut->setFlag(QGraphicsItem::ItemIsFocusable);
     tut->setFocus();
-
     scene->addItem(tut);
 
-    /*Player1 * p1 = new Player1(ei,ei2);
-    p1->setFlag(QGraphicsItem::ItemIsFocusable);
-    p1->setFocus();
-    scene->addItem(p1);*/
-
+    bgmusic = new QMediaPlayer();
+    bgmusic -> setMedia(QUrl("qrc:/Sounds/Resources/Sounds/background.mp3"));
+    if (bgmusic ->state() == QMediaPlayer::PlayingState){
+        bgmusic ->setPosition(0);
+    }
+    else if (bgmusic->state() == QMediaPlayer::StoppedState){
+        bgmusic->play();
+    }
 
     show();
 }

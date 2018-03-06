@@ -5,12 +5,15 @@
 #include <QObject>
 #include <QGraphicsItem>
 #include "Tower.h"
+#include <QMediaPlayer>
+#include "Thrd.h"
 
 
 class Player1: public QGraphicsPixmapItem {
 public:
     Player1(QGraphicsEllipseItem * c,QGraphicsEllipseItem *c2, QGraphicsItem * parent=0);
     void keyPressEvent(QKeyEvent * event);
+    QMediaPlayer *deny;
 
 private:
     bool select1,select2;
@@ -18,5 +21,6 @@ private:
     Tower * t1;
     QGraphicsEllipseItem * cur;
     QGraphicsEllipseItem * cur1;
+    Thrd * th;
 };
 #endif // PLAYER1_H

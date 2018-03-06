@@ -15,9 +15,10 @@ public:
     void rotateTopoint(QPointF p);//Set rotaion with respect to point p
     void decreasehealth(int damage);
     QGraphicsRectItem * healthbar;
-    static int flag;
+    int getPcode();
 public slots:
     void move_forward();              //Moves the ship forward
+    void delShip();
 private:
     QList<QPointF> points;            //List of points the ships have to traverse
     QPointF dest;                     //Dynamic Destinations
@@ -27,7 +28,7 @@ private:
     int max_h;
     int pcode;
     int distance;
-    QTimer * timer;
+
 
 
 };

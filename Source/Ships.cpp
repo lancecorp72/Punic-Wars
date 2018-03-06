@@ -1,6 +1,5 @@
 #include "Ships.h"
 #include <QPixmap>
-#include <QTimer>
 #include <qmath.h>
 #include <QDebug>
 #include <QBrush>
@@ -11,10 +10,9 @@
 extern Resource *player1_resources;
 extern Resource *player2_resources;
 extern Game * game;
+extern bool gameOn;
+
 Ships::Ships(int player_code ,QGraphicsScene * scene,int health,QGraphicsItem *parent): QGraphicsPixmapItem(parent) {
-
-
-
 
     //Initialization
     h=health;
@@ -23,17 +21,17 @@ Ships::Ships(int player_code ,QGraphicsScene * scene,int health,QGraphicsItem *p
     pcode=player_code;
     distance=0;
     // set graphics
-    if(player_code == 1)
+    if(player_code%2 == 1)
         setPixmap(QPixmap(":/Resources/images/boat1.png"));
-    else if(player_code == 2)
+    else if(player_code%2 == 0)
         setPixmap(QPixmap(":/Resources/images/boat2.png"));
 
 
-         s->addItem(this);
+     s->addItem(this);
 
 
      //add healthbar
-     if(player_code==1){
+     if(player_code%2 == 1){
             healthbar = new QGraphicsRectItem(5,5,25,5);
             healthbar->setBrush(QBrush(Qt::red,Qt::SolidPattern));
 
@@ -52,7 +50,7 @@ Ships::Ships(int player_code ,QGraphicsScene * scene,int health,QGraphicsItem *p
     setTransformOriginPoint(23,25);
 
     // set points
-    if(player_code == 1)
+    if(player_code%2 == 1)              //player_code is 1 or 3
     {
        points << QPointF(925,40)                           //Horizontal Segment 1
               << QPointF(925,140) << QPointF(1035,140)     //Segment 2
@@ -62,7 +60,7 @@ Ships::Ships(int player_code ,QGraphicsScene * scene,int health,QGraphicsItem *p
               << QPointF(1165,355) << QPointF(1290,355)    //Segment 6
               << QPointF(1290,445) << QPointF(1500,445);   //Segment 7
     }
-    else if(player_code == 2)
+    else                                //player_code is 2 or 4
     {
         points << QPointF(525,40)                           //Horizontal Segment 1
                << QPointF(525,140) << QPointF(415,140)     //Segment 2
@@ -72,32 +70,27 @@ Ships::Ships(int player_code ,QGraphicsScene * scene,int health,QGraphicsItem *p
                << QPointF(285,355) << QPointF(160,355)    //Segment 6
                << QPointF(160,445) << QPointF(-30,445);   //Segment 7
     }
+
     dest_index = 0;
     dest = points[0];
     rotateTopoint(dest);
 
-    // connect timer to move_forward
-    timer = new QTimer(this);
-    connect(timer,SIGNAL(timeout()),this,SLOT(move_forward()));
-    timer->start(100);
-
-
-
 }
- int Ships::flag=0;
+
 void Ships::decreasehealth(int damage)
 {
 
  h=h-damage;
- if(h>0)        //If possible , reduce health
-        healthbar->setRect(5+(pcode-1)*10,5+(pcode-1)*35,h*25/max_h,5);  //hates another if
+  //If possible , reduce health
+ if(h>0 && pcode%2==0)          //for player 1
+        healthbar->setRect(15,40,h*25/max_h,5);
+ if(h>0)                        //for player 2
+        healthbar->setRect(5,5,h*25/max_h,5);
  else           // else destroy ship
  {
-     s->removeItem(this);
-     s->removeItem(healthbar);
-     delete this;
+     setPos(-60,-10);
      //when ship is destroyed, resource is increased for attacking player
-     if(pcode==1) {
+     if(pcode%2 == 1) {
       player1_resources->incT(distance/50);
       player2_resources->incS(1);
      }
@@ -107,6 +100,12 @@ void Ships::decreasehealth(int damage)
      }
  }
 }
+
+int Ships::getPcode()
+{
+    return pcode;
+}
+
 void Ships::rotateTopoint(QPointF p){
     QLineF ln(pos(),p);
     setRotation(-1 * ln.angle());
@@ -115,37 +114,35 @@ void Ships::rotateTopoint(QPointF p){
 
 void Ships::move_forward(){
 
-
-    if(Ships::flag==1)
-        timer->blockSignals(true);
     // if close to dest, rotate to next dest
     QLineF ln(pos(),dest);
     if (ln.length() < 10) {
         dest_index++;
         if(dest_index >= points.size())
         {
-            Ships::flag=1;
+              if(pcode>2)
+                  return;
 
-            if(pcode==1)
-            {
+              if(!gameOn)
+                return;
 
+              gameOn=false;
+
+              if(pcode==1)
+              {
                 QMessageBox::StandardButton reply = QMessageBox::information(game,
                                                   "Winner Winner Chicken Dinner", "Player 1 Wins",
                                          QMessageBox::Ok );
-                game->close();
-             }
-            else
-            {
-
+              }
+             else
+             {
                 QMessageBox::StandardButton reply = QMessageBox::information(game,
                                                   "Winner Winner Chicken Dinner", "Player 2 Wins",
                                          QMessageBox::Ok );
-                game->close();
-            }
+             }
 
-            delete this;
-            return;
-
+             game->close();
+             return;
         }
 
         dest = points[dest_index];
@@ -167,3 +164,10 @@ void Ships::move_forward(){
     healthbar->setPos(x()+dx,y()+dy);
 
 }
+
+void Ships::delShip() {
+    s->removeItem(this);
+    s->removeItem(healthbar);
+    delete this;
+}
+
