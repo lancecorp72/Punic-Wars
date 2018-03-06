@@ -130,13 +130,31 @@ void Ships::move_forward(){
 
               if(pcode==1)
               {
-                QMessageBox::StandardButton reply = QMessageBox::information(game,
+                  game->bgmusic->stop();
+                  win = new QMediaPlayer();
+                  win -> setMedia(QUrl("qrc:/Sounds/Resources/Sounds/win.wav"));
+                  if (win->state() == QMediaPlayer::PlayingState){
+                      win->setPosition(0);
+                  }
+                  else if (win->state() == QMediaPlayer::StoppedState){
+                      win->play();
+                  }
+                  QMessageBox::StandardButton reply = QMessageBox::information(game,
                                                   "Winner Winner Chicken Dinner", "Player 1 Wins",
                                          QMessageBox::Ok );
               }
              else
              {
-                QMessageBox::StandardButton reply = QMessageBox::information(game,
+                  game->bgmusic->stop();
+                  win = new QMediaPlayer();
+                  win -> setMedia(QUrl("qrc:/Sounds/Resources/Sounds/win.wav"));
+                  if (win->state() == QMediaPlayer::PlayingState){
+                      win->setPosition(0);
+                  }
+                  else if (win->state() == QMediaPlayer::StoppedState){
+                      win->play();
+                  }
+                  QMessageBox::StandardButton reply = QMessageBox::information(game,
                                                   "Winner Winner Chicken Dinner", "Player 2 Wins",
                                          QMessageBox::Ok );
              }

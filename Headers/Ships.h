@@ -5,6 +5,7 @@
 #include <QObject>
 #include <QList>
 #include <QPointF>
+#include <QMediaPlayer>
 
 class Ships: public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
@@ -16,6 +17,7 @@ public:
     void decreasehealth(int damage);
     QGraphicsRectItem * healthbar;
     int getPcode();
+    QMediaPlayer *win;
 public slots:
     void move_forward();              //Moves the ship forward
     void delShip();
