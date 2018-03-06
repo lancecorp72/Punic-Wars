@@ -33,7 +33,8 @@ SOURCES += \
     Source/Ships.cpp \
     Source/Resource.cpp \
     Source/Path.cpp \
-    Source/Tutorial.cpp
+    Source/Tutorial.cpp \
+    Source/ShipThrd.cpp
 
 HEADERS += \
     Headers/Tower.h \
@@ -43,7 +44,9 @@ HEADERS += \
     Headers/Ships.h \
     Headers/Resource.h \
     Headers/Path.h \
-    Headers/Tutorial.h
+    Headers/Tutorial.h \
+    Headers/Thrd.h \
+    Headers/ShipThrd.h
 
 INCLUDEPATH += $$PWD/Headers
 

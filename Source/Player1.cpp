@@ -9,6 +9,7 @@
 #include <QDebug>
 #include "Path.h"
 #include "Game.h"
+#include "Thrd.h"
 
 extern Resource *player1_resources, *player2_resources;
 
@@ -78,6 +79,10 @@ void Player1::keyPressEvent(QKeyEvent *event) {
 
             }
 
+            if(t->x()<700&&cur->x()<700) {
+                t->setPos(t->x()+50,t->y());
+                cur->setPos(cur->x()+50,cur->y());
+            }
         }
         else if(event->key() == Qt::Key_Down) {
             if(t->y()<500&&cur->y()<500){
@@ -155,6 +160,8 @@ void Player1::keyPressEvent(QKeyEvent *event) {
             //Else Ships are added
             player1_resources->decS(1);
             Ships * s=new Ships(1,scene());
+            th=new Thrd();
+            th->thrdset(s);
         }
 
         //Moving cursor
@@ -307,6 +314,8 @@ void Player1::keyPressEvent(QKeyEvent *event) {
             //Else create ship and add to scene
             player2_resources->decS(1);
             Ships * s=new Ships(2,scene());
+            th=new Thrd();
+            th->thrdset(s);
         }
 
         //Moving cursor
