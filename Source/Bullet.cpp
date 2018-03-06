@@ -13,10 +13,13 @@ extern Resource *player2_resources;
 int STEP_SIZE = 5;
 
 Bullet::Bullet(int d,QGraphicsItem *parent): QObject(),QGraphicsPixmapItem(parent) {
+
     // set graphics
     setPixmap(QPixmap(":Resources/images/bullet.png"));
+
     //Initialization
     damage=d;
+
     // connect a timer to move()
     QTimer * move_timer = new QTimer(this);
     connect(move_timer,SIGNAL(timeout()),this,SLOT(move()));
@@ -28,6 +31,7 @@ Bullet::Bullet(int d,QGraphicsItem *parent): QObject(),QGraphicsPixmapItem(paren
 }
 
 void Bullet::move() {
+
     //check if bullet crossed range
     if(distanceTravelled>maxRange) {
        scene()->removeItem(this);
