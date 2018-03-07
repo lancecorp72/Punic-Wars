@@ -83,7 +83,8 @@ Ships::Ships(int player_code ,QGraphicsScene * scene,int health,QGraphicsItem *p
 void Ships::decreasehealth(int damage)
 {
     //Decreasing health and destroying the ships
- h=h-damage;
+    damage= 4+ distance*5/350;
+    h=h-damage;
 
  //If possible , reduce health
  if(h>0 && pcode%2==0)
@@ -104,11 +105,11 @@ void Ships::decreasehealth(int damage)
 
      //when ship is destroyed, resource is increased for attacking player
      if(pcode%2 == 1) {
-      player1_resources->incT(distance/50);
+      player1_resources->incT(distance/100);
       player2_resources->incS(1);
      }
      else {
-        player2_resources->incT(distance/50);
+        player2_resources->incT(distance/100);
         player1_resources->incS(1);
      }
  }

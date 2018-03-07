@@ -10,7 +10,7 @@
 class Ships: public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
 public:
-    Ships(int player_code,QGraphicsScene *scene,int health=20,QGraphicsItem * parent=0);
+    Ships(int player_code,QGraphicsScene *scene,int health=25,QGraphicsItem * parent=0);
 //                                    Player code = 1 for player 1
 //                                                = 2 for player 2
 

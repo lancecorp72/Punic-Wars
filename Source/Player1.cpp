@@ -32,7 +32,7 @@ void Player1::keyPressEvent(QKeyEvent *event) {
         //tower is selected
         t -> setPixmap(QPixmap(":/Resources/images/towByes.png"));
 
-        if(event->key() == Qt::Key_F) {
+        if(event->key() == Qt::Key_F&& (cur->x() >= 100 || cur->y() >= 50)) {
 
             Path *waters1 = new Path();
             int c1 = waters1->iscolliding();
@@ -192,7 +192,7 @@ void Player1::keyPressEvent(QKeyEvent *event) {
         //tower is selected
         t1 -> setPixmap(QPixmap(":/Resources/images/towByes.png"));
 
-        if(event->key() == Qt::Key_Return) {
+        if(event->key() == Qt::Key_Return && (cur1->x() < 1400 || cur1->y() >= 50)) {
             Path *waters2 = new Path();
             int c2 = waters2->iscolliding();
 
