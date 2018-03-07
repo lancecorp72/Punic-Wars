@@ -5,7 +5,7 @@ Resource::Resource(int player_code, QGraphicsItem *parent): QGraphicsTextItem(pa
 
     // initialize the resources to 100
     s_res = 3;
-    t_res = 3;
+    t_res = 2;
 
     // draw the text and set both resources to 10
     setRes();
