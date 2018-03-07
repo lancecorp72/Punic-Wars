@@ -9,8 +9,10 @@
 int STEP_SIZE = 5;
 
 Bullet::Bullet(int d,QGraphicsItem *parent): QObject(),QGraphicsPixmapItem(parent) {
+
     // set graphics
     setPixmap(QPixmap(":Resources/images/bullet.png"));
+
     //Initialization
     damage=d;
 
@@ -25,6 +27,7 @@ void Bullet::delBullet() {  //delete bullet from memory
 }
 
 void Bullet::move() {
+
     //check if bullet crossed range
     if(distanceTravelled>maxRange) {
        scene()->removeItem(this);
