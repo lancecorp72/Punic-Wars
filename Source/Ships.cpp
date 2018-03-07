@@ -100,8 +100,10 @@ void Ships::decreasehealth(int damage)
      //Play sounds
      splash = new QMediaPlayer();
      splash -> setMedia(QUrl("qrc:/Sounds/Resources/Sounds/splash.wav"));
-         splash->play();
+     splash->play();
      setPos(-60,-10);
+     scene()->removeItem(healthbar);
+     scene()->removeItem(this);
 
      //when ship is destroyed, resource is increased for attacking player
      if(pcode%2 == 1) {
@@ -206,8 +208,6 @@ void Ships::move_forward(){
 void Ships::delShip() {
 
     //Delete ship and health bar and remove them from the scene
-    s->removeItem(this);
-    s->removeItem(healthbar);
     delete this;
 }
 

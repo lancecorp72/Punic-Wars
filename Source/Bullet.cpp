@@ -44,10 +44,15 @@ void Bullet::move() {
         if (typeid(*(colliding_items[i])) == typeid(Ships)) { 
 
                 // remove them from the scene (still on the heap)
-                Ships *s =(Ships *)colliding_items[i];
-                s->decreasehealth(damage);
-                scene()->removeItem(this);          //remove bullet from scene
+                Ships *s =dynamic_cast<Ships *>(colliding_items[i]);
                 active=false;                       //bullet to be deleted in BulletThrd
+                scene()->removeItem(this);          //remove bullet from scene
+                if(!s)
+                {
+                    qInfo()<<"null";
+                    return;
+                }
+                s->decreasehealth(damage);
 
                 // return (all code below refers to a non existant bullet)
                 return;
