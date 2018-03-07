@@ -13,7 +13,6 @@ void ShipThrd::run() {
     if(gameOn)
         emit finished();
 }
-void ShipThrd::setShip(Ships *temp)
-{
+void ShipThrd::setShip(Ships *temp) {
     s=temp;
 }
