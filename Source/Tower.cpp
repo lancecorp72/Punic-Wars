@@ -7,10 +7,8 @@
 #include <QLineF>
 #include <QPointF>
 #include <QPolygonF>
-#include <QTimer>
 #include <QDebug>
-
-// list of points: (1,0), (2,0), (3,1), (3,2), (2,3), (1,3), (0,2), (0,1)
+#include "BulletMove.h"
 
 extern Game * game;
 
@@ -41,15 +39,9 @@ Tower::Tower(QGraphicsItem *parent):QObject(), QGraphicsPixmapItem(parent) {
     QLineF ln(poly_center,tower_center);
     attack_area->setPos(x()+ln.dx(),y()+ln.dy());
 
-    // connect a timer to attack_target
-    QTimer * timer = new QTimer();
-    connect(timer,SIGNAL(timeout()),this,SLOT(get_target()));
-    timer->start(700);
-
-
     //initialize bool variables
-    has_target=false;
-    no_fire=true;
+    has_target=false;   // check whether a target is obtained
+    no_fire=true;       //to prevent tower from firing before it is placed
 
     //hides the attack radius
     //attack_area->hide();
@@ -64,21 +56,22 @@ double Tower::distanceTo(QGraphicsItem *item) {
 void Tower::fire() {
     Bullet * bullet = new Bullet();
     bullet->setPos(pos()+tcenter);
-    //qInfo()<<mapFromScene(sceneBoundingRect().center());
 
     QLineF ln(pos()+tcenter,attack_dest);
     int angle = -1 * ln.angle();
 
     bullet->setRotation(angle);
     game->scene->addItem(bullet);
+
+    BulletMove * bm=new BulletMove();
+    bm->thrdset(bullet);
 }
 
-void Tower::setNoFire()
-{
+void Tower::setNoFire() {
     no_fire=false;
 }
 
-void Tower::get_target(){
+void Tower::get_target() {
     if(no_fire)
         return;
     // get a list of all items colliding with attack_area

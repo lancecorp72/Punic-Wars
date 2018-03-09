@@ -5,7 +5,16 @@
         <file>Resources/images/tower.jpg</file>
         <file>Resources/images/bullet.png</file>
         <file>Resources/images/sel_tow.jpg</file>
-        <file>Resources/images/boat.png</file>
         <file>Resources/images/towB.png</file>
+        <file>Resources/images/boat2.png</file>
+        <file>Resources/images/boat1.png</file>
+        <file>Resources/images/towBno.png</file>
+        <file>Resources/images/towByes.png</file>
+    </qresource>
+    <qresource prefix="/Sounds">
+        <file>Resources/Sounds/Error_alert.wav</file>
+        <file>Resources/Sounds/background.mp3</file>
+        <file>Resources/Sounds/win.wav</file>
+        <file>Resources/Sounds/splash.wav</file>
     </qresource>
 </RCC>
